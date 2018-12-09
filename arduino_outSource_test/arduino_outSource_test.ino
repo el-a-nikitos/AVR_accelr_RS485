@@ -29,6 +29,8 @@ float minAccel = 160;
 float deltaAccel = 0;
 float error = 0;
 
+int _i2caddr = 0x19;
+
 void setup(void) {
 #ifndef ESP8266
   while (!Serial);     // will pause Zero, Leonardo, etc until serial console opens
@@ -86,9 +88,42 @@ void loop() {
   Serial.print(" \tmaxA: "); Serial.print(maxAccel); 
   Serial.print("\tm/s^2 ");
   Serial.print(" \tError: "); Serial.print(error); 
-  Serial.print("\t%");
-
+  Serial.print("\tREG_TEMPCFG: ");
+  Serial.print(readRegister8(LIS3DH_REG_TEMPCFG));
+  Serial.print("\tREG_CTRL1: ");
+  Serial.print(readRegister8(LIS3DH_REG_CTRL1));
+  Serial.print("\tREG_CTRL2: ");
+  Serial.print(readRegister8(LIS3DH_REG_CTRL2));
+  Serial.print("\tREG_CTRL3: ");
+  Serial.print(readRegister8(LIS3DH_REG_CTRL3));
+  Serial.print("\tREG_CTRL4: ");
+  Serial.print(readRegister8(LIS3DH_REG_CTRL4));
+  Serial.print("\tREG_CTRL5: ");
+  Serial.print(readRegister8(LIS3DH_REG_CTRL5));
+  Serial.print("\tREG_CTRL6: ");
+  Serial.print(readRegister8(LIS3DH_REG_CTRL6));
+  Serial.print("\tREG_REFERENCE: ");
+  Serial.print(readRegister8(LIS3DH_REG_REFERENCE));
+  
   Serial.println();
  
   delay(500); 
 }
+
+void writeRegister8(uint8_t reg, uint8_t value) {  // (регистр, значение)
+  
+    Wire.beginTransmission((uint8_t)_i2caddr);
+    Wire.write((uint8_t)reg);
+    Wire.write((uint8_t)value);
+    Wire.endTransmission();
+  } 
+
+uint8_t readRegister8(uint8_t reg) {
+    Wire.beginTransmission(_i2caddr);
+    Wire.write((uint8_t)reg);
+    Wire.endTransmission();
+
+    Wire.requestFrom(_i2caddr, 1);
+    
+    return Wire.read();
+  } 
