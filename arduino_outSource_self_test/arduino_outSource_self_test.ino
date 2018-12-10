@@ -89,7 +89,7 @@ void loop() {
   Temp = getFullData(readRegister8( LIS3DH_REG_OUTADC3_L ), readRegister8( LIS3DH_REG_OUTADC3_H ));
   
   Serial.print("\tT:");
-  Serial.print( Temp );
+  Serial.print( (float)Temp );
   
   Serial.print("\tCTRL1:");
   Serial.print( readRegister8( LIS3DH_REG_CTRL1 ) );
@@ -103,22 +103,22 @@ void loop() {
   Serial.print( readRegister8( LIS3DH_REG_OUT_X_H ) );
   ax = getFullData(readRegister8( LIS3DH_REG_OUT_X_L ), readRegister8( LIS3DH_REG_OUT_X_H ));
   Serial.print("\tAx:");
-  Serial.print( ((float)ax*16*9.81/1024), 3 );
+  Serial.print( ((float)ax*32*9.81/1024), 3 );
   
   ay = getFullData(readRegister8( LIS3DH_REG_OUT_Y_L ), readRegister8( LIS3DH_REG_OUT_Y_H ));
   Serial.print("\tAy:");
-  Serial.print( ((float)ay*16*9.81/1024), 3 );
+  Serial.print( ((float)ay*32*9.81/1024), 3 );
   
   az = getFullData(readRegister8( LIS3DH_REG_OUT_Z_L ), readRegister8( LIS3DH_REG_OUT_Z_H ));
   Serial.print("\tAz:");
-  Serial.print( ((float)az*16*9.81/1024), 3 );
+  Serial.print( ((float)az*32*9.81/1024), 3 );
 
   Serial.println();
   delay(500);
 }
 
 int getFullData(int8_t RegL, int8_t RegH)  {
-  return  2*(RegL + RegH*256)/64;
+  return  (RegL + RegH*256)/32;
 }
 
 void writeRegister8(uint8_t reg, uint8_t value) {  // (регистр, значение)

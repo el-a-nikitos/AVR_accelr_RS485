@@ -24,8 +24,7 @@ Adafruit_LIS3DH lis = Adafruit_LIS3DH();
    #define Serial SerialUSB
 #endif
 
-float maxAccel = 0;
-float minAccel = 160;
+float lastAccel = 0;
 float deltaAccel = 0;
 float error = 0;
 
@@ -68,26 +67,18 @@ void loop() {
   
   float accel = sqrt( (event.acceleration.x)*(event.acceleration.x)+(event.acceleration.y)*(event.acceleration.y)+(event.acceleration.z)*(event.acceleration.z) );
   
-  if (accel>maxAccel)  {
-    maxAccel = accel;
-  }
-  
-  if (accel<minAccel)  {
-    minAccel = accel;
-  }
-  
-  deltaAccel = maxAccel - minAccel;
+  deltaAccel = abs(lastAccel - accel);
   error = 100*deltaAccel/16/9.81;
+
+  lastAccel = accel;
   
   /* Display the results (acceleration is measured in m/s^2) */
   Serial.print("\tX: "); Serial.print(event.acceleration.x);
   Serial.print(" \tY: "); Serial.print(event.acceleration.y); 
   Serial.print(" \tZ: "); Serial.print(event.acceleration.z); 
   Serial.print(" \tA: "); Serial.print(accel); 
-  Serial.print(" \tminA: "); Serial.print(minAccel); 
-  Serial.print(" \tmaxA: "); Serial.print(maxAccel); 
   Serial.print("\tm/s^2 ");
-  Serial.print(" \tError: "); Serial.print(error); 
+  Serial.print(" \t\tError: "); Serial.print(error); /*
   Serial.print("\tREG_TEMPCFG: ");
   Serial.print(readRegister8(LIS3DH_REG_TEMPCFG));
   Serial.print("\tREG_CTRL1: ");
@@ -103,7 +94,7 @@ void loop() {
   Serial.print("\tREG_CTRL6: ");
   Serial.print(readRegister8(LIS3DH_REG_CTRL6));
   Serial.print("\tREG_REFERENCE: ");
-  Serial.print(readRegister8(LIS3DH_REG_REFERENCE));
+  Serial.print(readRegister8(LIS3DH_REG_REFERENCE));*/
   
   Serial.println();
  
