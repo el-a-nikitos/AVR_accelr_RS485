@@ -55,7 +55,7 @@ void loop()
     // a device did acknowledge to the address.
     Wire.beginTransmission(address);
     error = Wire.endTransmission();
- 
+    delay(10);
     if (error == 0)
     {
       Serial.print("I2C device found at address 0x");

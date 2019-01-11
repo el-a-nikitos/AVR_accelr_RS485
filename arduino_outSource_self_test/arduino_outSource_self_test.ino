@@ -49,8 +49,8 @@ void setup() {
   
   //writeRegister8(LIS3DH_REG_TEMPCFG, 0b11000000);  // разрешаем работу АЦП3 и датчика температуры
   //writeRegister8(LIS3DH_REG_CTRL4, 0b10110000);    // запрет обновления даных, пока читается регистр, установка диапазона в 16G
-                                                   // [BlockDataUpDate BigLitEnd FullScale1 FullScale0 HighResol SelfTest1 SelfTest0 SPI]
-                                                   // [7               6         5          4          3         2         1         0  ]
+                                                     // [BlockDataUpDate BigLitEnd FullScale1 FullScale0 HighResol SelfTest1 SelfTest0 SPI]
+                                                     // [7               6         5          4          3         2         1         0  ]
   /*
   REG_TEMPCFG: 128
   REG_CTRL1: 119
