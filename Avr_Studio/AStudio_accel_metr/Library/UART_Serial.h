@@ -1,5 +1,5 @@
 
-void Seral_open(unsigned char ubrr)	{
+void UART_open(unsigned char ubrr)	{
 	//UBRRH = (unsigned char)(ubrr>>8);
 	
 	UBRRH = 0;
@@ -12,7 +12,7 @@ void Seral_open(unsigned char ubrr)	{
 }
  
  
- void Seral_write(byte data)	{
+ void UART_write(byte data)	{
 	 while ( !((UCSRA)&(1<<UDRE)) );
 	 
 	 UDR = data;

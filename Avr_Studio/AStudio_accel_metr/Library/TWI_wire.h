@@ -22,33 +22,29 @@ void TWI_start_write_stop(uint8_t addres, uint8_t DATA)	{
 	TWCR = 0;
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
 	      //запуск TWI / TWI мастер / TWI включен
-		  
 	while( !(TWCR & (1<<TWINT)) );
 	// проверка, что TWINT сброшен, т.е. операци€ выполнена
 	/*
 	тут должна быть проверка регистров статуса, вместо него пока просто задержка
 	*/
-			Seral_write( TWSR );
+			UART_write( TWSR );
 			delay_counters(300000);
-			Seral_write( 0xC1 );
+			UART_write( 0xC1 );
 			delay_counters(300000);
+	
 	
 	TWDR = addres;
-	
+			
 	TWCR = (1<<TWINT) | (1<<TWEN);
 		  //запуск TWI
-
-		  
 	while( !(TWCR & (1<<TWINT)) );
-	
 	// проверка, что TWINT выставлен, т.е. операци€ выполнена
-	
 	/*
 	тут тоже должна быть проверка регистров статуса, вместо него тоже пока просто задержка
 	*/
-			Seral_write( TWSR );
+			UART_write( TWSR );
 			delay_counters(300000);
-			Seral_write( 0xC2 );
+			UART_write( 0xC2 );
 			delay_counters(300000);
 	/*
 	TWDR = DATA;
@@ -59,9 +55,11 @@ void TWI_start_write_stop(uint8_t addres, uint8_t DATA)	{
 	/*
 	тут тоже должна быть проверка регистров статуса, вместо него тоже пока просто задержка
 	*/
-	
+			UART_write( TWSR );
 			delay_counters(300000);
-	
+			UART_write( 0xC3 );
+			delay_counters(300000);
+			
 	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);
 	
 }

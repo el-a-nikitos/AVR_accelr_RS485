@@ -3,53 +3,55 @@ AStudio_accel_metr.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000013a  00000000  00000000  00000054  2**1
+  0 .text         0000029e  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  0000018e  2**0
+  1 .data         00000002  00800060  0000029e  00000332  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  0000018e  2**0
+  2 .bss          00000001  00800062  00800062  00000334  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000334  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001c0  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000364  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000060  00000000  00000000  000001fc  2**0
+  5 .debug_aranges 00000090  00000000  00000000  000003a0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000009b2  00000000  00000000  0000025c  2**0
+  6 .debug_info   000010ca  00000000  00000000  00000430  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000059e  00000000  00000000  00000c0e  2**0
+  7 .debug_abbrev 0000062f  00000000  00000000  000014fa  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000003fb  00000000  00000000  000011ac  2**0
+  8 .debug_line   00000779  00000000  00000000  00001b29  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000000b4  00000000  00000000  000015a8  2**2
+  9 .debug_frame  00000114  00000000  00000000  000022a4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000003a1  00000000  00000000  0000165c  2**0
+ 10 .debug_str    0000045a  00000000  00000000  000023b8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000001e6  00000000  00000000  000019fd  2**0
+ 11 .debug_loc    0000091d  00000000  00000000  00002812  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000050  00000000  00000000  00001be3  2**0
+ 12 .debug_ranges 00000080  00000000  00000000  0000312f  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
-   2:	24 c0       	rjmp	.+72     	; 0x4c <__bad_interrupt>
-   4:	23 c0       	rjmp	.+70     	; 0x4c <__bad_interrupt>
-   6:	22 c0       	rjmp	.+68     	; 0x4c <__bad_interrupt>
-   8:	21 c0       	rjmp	.+66     	; 0x4c <__bad_interrupt>
-   a:	20 c0       	rjmp	.+64     	; 0x4c <__bad_interrupt>
-   c:	1f c0       	rjmp	.+62     	; 0x4c <__bad_interrupt>
-   e:	1e c0       	rjmp	.+60     	; 0x4c <__bad_interrupt>
-  10:	1d c0       	rjmp	.+58     	; 0x4c <__bad_interrupt>
-  12:	1c c0       	rjmp	.+56     	; 0x4c <__bad_interrupt>
-  14:	1b c0       	rjmp	.+54     	; 0x4c <__bad_interrupt>
-  16:	1a c0       	rjmp	.+52     	; 0x4c <__bad_interrupt>
-  18:	19 c0       	rjmp	.+50     	; 0x4c <__bad_interrupt>
-  1a:	18 c0       	rjmp	.+48     	; 0x4c <__bad_interrupt>
-  1c:	17 c0       	rjmp	.+46     	; 0x4c <__bad_interrupt>
-  1e:	16 c0       	rjmp	.+44     	; 0x4c <__bad_interrupt>
-  20:	15 c0       	rjmp	.+42     	; 0x4c <__bad_interrupt>
-  22:	14 c0       	rjmp	.+40     	; 0x4c <__bad_interrupt>
-  24:	13 c0       	rjmp	.+38     	; 0x4c <__bad_interrupt>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
 
 00000026 <__ctors_end>:
   26:	11 24       	eor	r1, r1
@@ -63,185 +65,488 @@ Disassembly of section .text:
   32:	10 e0       	ldi	r17, 0x00	; 0
   34:	a0 e6       	ldi	r26, 0x60	; 96
   36:	b0 e0       	ldi	r27, 0x00	; 0
-  38:	ea e3       	ldi	r30, 0x3A	; 58
-  3a:	f1 e0       	ldi	r31, 0x01	; 1
+  38:	ee e9       	ldi	r30, 0x9E	; 158
+  3a:	f2 e0       	ldi	r31, 0x02	; 2
   3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
   3e:	05 90       	lpm	r0, Z+
   40:	0d 92       	st	X+, r0
-  42:	a0 36       	cpi	r26, 0x60	; 96
+  42:	a2 36       	cpi	r26, 0x62	; 98
   44:	b1 07       	cpc	r27, r17
   46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
-  48:	4d d0       	rcall	.+154    	; 0xe4 <main>
-  4a:	75 c0       	rjmp	.+234    	; 0x136 <_exit>
 
-0000004c <__bad_interrupt>:
-  4c:	d9 cf       	rjmp	.-78     	; 0x0 <__vectors>
+00000048 <__do_clear_bss>:
+  48:	20 e0       	ldi	r18, 0x00	; 0
+  4a:	a2 e6       	ldi	r26, 0x62	; 98
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
 
-0000004e <digitalWrite_portB>:
-	DATA = TWDR;	
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a3 36       	cpi	r26, 0x63	; 99
+  54:	b2 07       	cpc	r27, r18
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	e8 d0       	rcall	.+464    	; 0x22a <main>
+  5a:	1f c1       	rjmp	.+574    	; 0x29a <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <digitalWrite_portB>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  5e:	96 2f       	mov	r25, r22
+  60:	68 b3       	in	r22, 0x18	; 24
+  62:	21 e0       	ldi	r18, 0x01	; 1
+  64:	30 e0       	ldi	r19, 0x00	; 0
+  66:	08 2e       	mov	r0, r24
+  68:	02 c0       	rjmp	.+4      	; 0x6e <digitalWrite_portB+0x10>
+  6a:	22 0f       	add	r18, r18
+  6c:	33 1f       	adc	r19, r19
+  6e:	0a 94       	dec	r0
+  70:	e2 f7       	brpl	.-8      	; 0x6a <digitalWrite_portB+0xc>
+  72:	20 95       	com	r18
+  74:	26 23       	and	r18, r22
+  76:	69 2f       	mov	r22, r25
+  78:	70 e0       	ldi	r23, 0x00	; 0
+  7a:	02 c0       	rjmp	.+4      	; 0x80 <digitalWrite_portB+0x22>
+  7c:	66 0f       	add	r22, r22
+  7e:	77 1f       	adc	r23, r23
+  80:	8a 95       	dec	r24
+  82:	e2 f7       	brpl	.-8      	; 0x7c <digitalWrite_portB+0x1e>
+  84:	62 2b       	or	r22, r18
+  86:	68 bb       	out	0x18, r22	; 24
+  88:	08 95       	ret
+
+0000008a <pinMode_portB>:
+  8a:	96 2f       	mov	r25, r22
+  8c:	67 b3       	in	r22, 0x17	; 23
+  8e:	21 e0       	ldi	r18, 0x01	; 1
+  90:	30 e0       	ldi	r19, 0x00	; 0
+  92:	08 2e       	mov	r0, r24
+  94:	02 c0       	rjmp	.+4      	; 0x9a <pinMode_portB+0x10>
+  96:	22 0f       	add	r18, r18
+  98:	33 1f       	adc	r19, r19
+  9a:	0a 94       	dec	r0
+  9c:	e2 f7       	brpl	.-8      	; 0x96 <pinMode_portB+0xc>
+  9e:	20 95       	com	r18
+  a0:	26 23       	and	r18, r22
+  a2:	69 2f       	mov	r22, r25
+  a4:	70 e0       	ldi	r23, 0x00	; 0
+  a6:	02 c0       	rjmp	.+4      	; 0xac <pinMode_portB+0x22>
+  a8:	66 0f       	add	r22, r22
+  aa:	77 1f       	adc	r23, r23
+  ac:	8a 95       	dec	r24
+  ae:	e2 f7       	brpl	.-8      	; 0xa8 <pinMode_portB+0x1e>
+  b0:	62 2b       	or	r22, r18
+  b2:	67 bb       	out	0x17, r22	; 23
+  b4:	08 95       	ret
+
+000000b6 <delay_counters>:
+  b6:	ab 01       	movw	r20, r22
+  b8:	bc 01       	movw	r22, r24
+  ba:	41 15       	cp	r20, r1
+  bc:	51 05       	cpc	r21, r1
+  be:	61 05       	cpc	r22, r1
+  c0:	71 05       	cpc	r23, r1
+  c2:	61 f0       	breq	.+24     	; 0xdc <delay_counters+0x26>
+  c4:	80 e0       	ldi	r24, 0x00	; 0
+  c6:	90 e0       	ldi	r25, 0x00	; 0
+  c8:	dc 01       	movw	r26, r24
+  ca:	00 00       	nop
+  cc:	01 96       	adiw	r24, 0x01	; 1
+  ce:	a1 1d       	adc	r26, r1
+  d0:	b1 1d       	adc	r27, r1
+  d2:	48 17       	cp	r20, r24
+  d4:	59 07       	cpc	r21, r25
+  d6:	6a 07       	cpc	r22, r26
+  d8:	7b 07       	cpc	r23, r27
+  da:	b9 f7       	brne	.-18     	; 0xca <delay_counters+0x14>
+  dc:	08 95       	ret
+
+000000de <UART_open>:
+  de:	10 bc       	out	0x20, r1	; 32
+  e0:	89 b9       	out	0x09, r24	; 9
+  e2:	88 e1       	ldi	r24, 0x18	; 24
+  e4:	8a b9       	out	0x0a, r24	; 10
+  e6:	8e e8       	ldi	r24, 0x8E	; 142
+  e8:	80 bd       	out	0x20, r24	; 32
+  ea:	08 95       	ret
+
+000000ec <UART_write>:
+  ec:	5d 9b       	sbis	0x0b, 5	; 11
+  ee:	fe cf       	rjmp	.-4      	; 0xec <UART_write>
+  f0:	8c b9       	out	0x0c, r24	; 12
+  f2:	08 95       	ret
+
+000000f4 <i2c_stop_cond>:
+  f4:	a5 9a       	sbi	0x14, 5	; 20
+  f6:	85 e3       	ldi	r24, 0x35	; 53
+  f8:	8a 95       	dec	r24
+  fa:	f1 f7       	brne	.-4      	; 0xf8 <i2c_stop_cond+0x4>
+  fc:	00 00       	nop
+  fe:	a4 9a       	sbi	0x14, 4	; 20
+ 100:	85 e3       	ldi	r24, 0x35	; 53
+ 102:	8a 95       	dec	r24
+ 104:	f1 f7       	brne	.-4      	; 0x102 <i2c_stop_cond+0xe>
+ 106:	00 00       	nop
+ 108:	a5 98       	cbi	0x14, 5	; 20
+ 10a:	85 e3       	ldi	r24, 0x35	; 53
+ 10c:	8a 95       	dec	r24
+ 10e:	f1 f7       	brne	.-4      	; 0x10c <i2c_stop_cond+0x18>
+ 110:	00 00       	nop
+ 112:	a4 98       	cbi	0x14, 4	; 20
+ 114:	85 e3       	ldi	r24, 0x35	; 53
+ 116:	8a 95       	dec	r24
+ 118:	f1 f7       	brne	.-4      	; 0x116 <i2c_stop_cond+0x22>
+ 11a:	00 00       	nop
+ 11c:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <__data_end>
+ 120:	9c 99       	sbic	0x13, 4	; 19
+ 122:	05 c0       	rjmp	.+10     	; 0x12e <i2c_stop_cond+0x3a>
+ 124:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__data_end>
+ 128:	8f 5f       	subi	r24, 0xFF	; 255
+ 12a:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+ 12e:	9d 99       	sbic	0x13, 5	; 19
+ 130:	05 c0       	rjmp	.+10     	; 0x13c <i2c_stop_cond+0x48>
+ 132:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__data_end>
+ 136:	8f 5f       	subi	r24, 0xFF	; 255
+ 138:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+ 13c:	85 e3       	ldi	r24, 0x35	; 53
+ 13e:	8a 95       	dec	r24
+ 140:	f1 f7       	brne	.-4      	; 0x13e <i2c_stop_cond+0x4a>
+ 142:	00 00       	nop
+ 144:	85 e3       	ldi	r24, 0x35	; 53
+ 146:	8a 95       	dec	r24
+ 148:	f1 f7       	brne	.-4      	; 0x146 <i2c_stop_cond+0x52>
+ 14a:	00 00       	nop
+ 14c:	85 e3       	ldi	r24, 0x35	; 53
+ 14e:	8a 95       	dec	r24
+ 150:	f1 f7       	brne	.-4      	; 0x14e <i2c_stop_cond+0x5a>
+ 152:	00 00       	nop
+ 154:	85 e3       	ldi	r24, 0x35	; 53
+ 156:	8a 95       	dec	r24
+ 158:	f1 f7       	brne	.-4      	; 0x156 <i2c_stop_cond+0x62>
+ 15a:	00 00       	nop
+ 15c:	08 95       	ret
+
+0000015e <i2c_programm_init>:
+ 15e:	a4 98       	cbi	0x14, 4	; 20
+ 160:	a5 98       	cbi	0x14, 5	; 20
+ 162:	ac 98       	cbi	0x15, 4	; 21
+ 164:	ad 98       	cbi	0x15, 5	; 21
+ 166:	c6 df       	rcall	.-116    	; 0xf4 <i2c_stop_cond>
+ 168:	c5 df       	rcall	.-118    	; 0xf4 <i2c_stop_cond>
+ 16a:	08 95       	ret
+
+0000016c <i2c_restart_cond>:
+
+//===============================================================
+//      Генерация условия рестарт
+//===============================================================
+void i2c_restart_cond (void)	{	
+	I2C_DDR &= ~_BV(SDA); // отпустить SDA (лог.1)
+ 16c:	a4 98       	cbi	0x14, 4	; 20
+ 16e:	85 e3       	ldi	r24, 0x35	; 53
+ 170:	8a 95       	dec	r24
+ 172:	f1 f7       	brne	.-4      	; 0x170 <i2c_restart_cond+0x4>
+ 174:	00 00       	nop
+	I2C_DELAY
+	I2C_DDR &= ~_BV(SCL); // отпустить SCL (лог.1)
+ 176:	a5 98       	cbi	0x14, 5	; 20
+ 178:	85 e3       	ldi	r24, 0x35	; 53
+ 17a:	8a 95       	dec	r24
+ 17c:	f1 f7       	brne	.-4      	; 0x17a <i2c_restart_cond+0xe>
+ 17e:	00 00       	nop
+	I2C_DELAY
 	
-	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);
+	I2C_DDR |= _BV(SDA); // притянуть SDA (лог.0)
+ 180:	a4 9a       	sbi	0x14, 4	; 20
+ 182:	85 e3       	ldi	r24, 0x35	; 53
+ 184:	8a 95       	dec	r24
+ 186:	f1 f7       	brne	.-4      	; 0x184 <i2c_restart_cond+0x18>
+ 188:	00 00       	nop
+	I2C_DELAY
+	I2C_DDR |= _BV(SCL); // притянуть SCL (лог.0)
+ 18a:	a5 9a       	sbi	0x14, 5	; 20
+ 18c:	85 e3       	ldi	r24, 0x35	; 53
+ 18e:	8a 95       	dec	r24
+ 190:	f1 f7       	brne	.-4      	; 0x18e <i2c_restart_cond+0x22>
+ 192:	00 00       	nop
+ 194:	08 95       	ret
+
+00000196 <i2c_send_byte>:
+
+                   
+//===============================================================
+//                    Отправка байта по I2С
+//===============================================================
+unsigned char i2c_send_byte (unsigned char data)	{	
+ 196:	98 e0       	ldi	r25, 0x08	; 8
+ unsigned char i;
+ unsigned char ack=1;			//АСК, если АСК=1 – произошла ошибка
+	for (i=0;i<8;i++)
+	{
+		if ((data&0x80)==0x00) I2C_DDR |= _BV(SDA);	// Выставить бит на SDA (лог.0)
+ 198:	88 23       	and	r24, r24
+ 19a:	14 f0       	brlt	.+4      	; 0x1a0 <i2c_send_byte+0xa>
+ 19c:	a4 9a       	sbi	0x14, 4	; 20
+ 19e:	01 c0       	rjmp	.+2      	; 0x1a2 <i2c_send_byte+0xc>
+		else I2C_DDR &= ~_BV(SDA); // лог.1
+ 1a0:	a4 98       	cbi	0x14, 4	; 20
+ 1a2:	25 e3       	ldi	r18, 0x35	; 53
+ 1a4:	2a 95       	dec	r18
+ 1a6:	f1 f7       	brne	.-4      	; 0x1a4 <i2c_send_byte+0xe>
+ 1a8:	00 00       	nop
+		I2C_DELAY
+		I2C_DDR &= ~_BV(SCL);	// Записать его импульсом на SCL       // отпустить SCL (лог.1)
+ 1aa:	a5 98       	cbi	0x14, 5	; 20
+ 1ac:	25 e3       	ldi	r18, 0x35	; 53
+ 1ae:	2a 95       	dec	r18
+ 1b0:	f1 f7       	brne	.-4      	; 0x1ae <i2c_send_byte+0x18>
+ 1b2:	00 00       	nop
+		I2C_DELAY
+		I2C_DDR |= _BV(SCL); // притянуть SCL (лог.0)
+ 1b4:	a5 9a       	sbi	0x14, 5	; 20
+		data=data<<1;
+ 1b6:	88 0f       	add	r24, r24
+ 1b8:	91 50       	subi	r25, 0x01	; 1
+//                    Отправка байта по I2С
+//===============================================================
+unsigned char i2c_send_byte (unsigned char data)	{	
+ unsigned char i;
+ unsigned char ack=1;			//АСК, если АСК=1 – произошла ошибка
+	for (i=0;i<8;i++)
+ 1ba:	71 f7       	brne	.-36     	; 0x198 <i2c_send_byte+0x2>
+		I2C_DDR &= ~_BV(SCL);	// Записать его импульсом на SCL       // отпустить SCL (лог.1)
+		I2C_DELAY
+		I2C_DDR |= _BV(SCL); // притянуть SCL (лог.0)
+		data=data<<1;
+	}
+	I2C_DDR &= ~_BV(SDA); // отпустить SDA (лог.1), чтобы ведомое устройство смогло сгенерировать ACK
+ 1bc:	a4 98       	cbi	0x14, 4	; 20
+ 1be:	85 e3       	ldi	r24, 0x35	; 53
+ 1c0:	8a 95       	dec	r24
+ 1c2:	f1 f7       	brne	.-4      	; 0x1c0 <i2c_send_byte+0x2a>
+ 1c4:	00 00       	nop
+	I2C_DELAY
+	I2C_DDR &= ~_BV(SCL); // отпустить SCL (лог.1), чтобы ведомое устройство передало ACK
+ 1c6:	a5 98       	cbi	0x14, 5	; 20
+ 1c8:	25 e3       	ldi	r18, 0x35	; 53
+ 1ca:	2a 95       	dec	r18
+ 1cc:	f1 f7       	brne	.-4      	; 0x1ca <i2c_send_byte+0x34>
+ 1ce:	00 00       	nop
+	I2C_DELAY
+	if ((I2C_PIN&_BV(SDA))==_BV(SDA)) ack=1; else ack=0;	// Считать ACK
+ 1d0:	83 b3       	in	r24, 0x13	; 19
+
+	I2C_DDR |= _BV(SCL); // притянуть SCL (лог.0)  // приём ACK завершён
+ 1d2:	a5 9a       	sbi	0x14, 5	; 20
 	
-	return DATA;
+	return ack; // вернуть ACK (0) или NACK (1)
 }
-  4e:	96 2f       	mov	r25, r22
-  50:	68 b3       	in	r22, 0x18	; 24
-  52:	21 e0       	ldi	r18, 0x01	; 1
-  54:	30 e0       	ldi	r19, 0x00	; 0
-  56:	08 2e       	mov	r0, r24
-  58:	02 c0       	rjmp	.+4      	; 0x5e <digitalWrite_portB+0x10>
-  5a:	22 0f       	add	r18, r18
-  5c:	33 1f       	adc	r19, r19
-  5e:	0a 94       	dec	r0
-  60:	e2 f7       	brpl	.-8      	; 0x5a <digitalWrite_portB+0xc>
-  62:	20 95       	com	r18
-  64:	26 23       	and	r18, r22
-  66:	69 2f       	mov	r22, r25
-  68:	70 e0       	ldi	r23, 0x00	; 0
-  6a:	02 c0       	rjmp	.+4      	; 0x70 <digitalWrite_portB+0x22>
-  6c:	66 0f       	add	r22, r22
-  6e:	77 1f       	adc	r23, r23
-  70:	8a 95       	dec	r24
-  72:	e2 f7       	brpl	.-8      	; 0x6c <digitalWrite_portB+0x1e>
-  74:	62 2b       	or	r22, r18
-  76:	68 bb       	out	0x18, r22	; 24
-  78:	08 95       	ret
+ 1d4:	82 95       	swap	r24
+ 1d6:	81 70       	andi	r24, 0x01	; 1
+ 1d8:	08 95       	ret
 
-0000007a <pinMode_portB>:
-  7a:	96 2f       	mov	r25, r22
-  7c:	67 b3       	in	r22, 0x17	; 23
-  7e:	21 e0       	ldi	r18, 0x01	; 1
-  80:	30 e0       	ldi	r19, 0x00	; 0
-  82:	08 2e       	mov	r0, r24
-  84:	02 c0       	rjmp	.+4      	; 0x8a <pinMode_portB+0x10>
-  86:	22 0f       	add	r18, r18
-  88:	33 1f       	adc	r19, r19
-  8a:	0a 94       	dec	r0
-  8c:	e2 f7       	brpl	.-8      	; 0x86 <pinMode_portB+0xc>
-  8e:	20 95       	com	r18
-  90:	26 23       	and	r18, r22
-  92:	69 2f       	mov	r22, r25
-  94:	70 e0       	ldi	r23, 0x00	; 0
-  96:	02 c0       	rjmp	.+4      	; 0x9c <pinMode_portB+0x22>
-  98:	66 0f       	add	r22, r22
-  9a:	77 1f       	adc	r23, r23
-  9c:	8a 95       	dec	r24
-  9e:	e2 f7       	brpl	.-8      	; 0x98 <pinMode_portB+0x1e>
-  a0:	62 2b       	or	r22, r18
-  a2:	67 bb       	out	0x17, r22	; 23
-  a4:	08 95       	ret
+000001da <i2c_get_byte>:
 
-000000a6 <delay_counters>:
-  a6:	ab 01       	movw	r20, r22
-  a8:	bc 01       	movw	r22, r24
-  aa:	41 15       	cp	r20, r1
-  ac:	51 05       	cpc	r21, r1
-  ae:	61 05       	cpc	r22, r1
-  b0:	71 05       	cpc	r23, r1
-  b2:	61 f0       	breq	.+24     	; 0xcc <delay_counters+0x26>
-  b4:	80 e0       	ldi	r24, 0x00	; 0
-  b6:	90 e0       	ldi	r25, 0x00	; 0
-  b8:	dc 01       	movw	r26, r24
-  ba:	00 00       	nop
-  bc:	01 96       	adiw	r24, 0x01	; 1
-  be:	a1 1d       	adc	r26, r1
-  c0:	b1 1d       	adc	r27, r1
-  c2:	48 17       	cp	r20, r24
-  c4:	59 07       	cpc	r21, r25
-  c6:	6a 07       	cpc	r22, r26
-  c8:	7b 07       	cpc	r23, r27
-  ca:	b9 f7       	brne	.-18     	; 0xba <delay_counters+0x14>
-  cc:	08 95       	ret
 
-000000ce <Seral_open>:
-  ce:	10 bc       	out	0x20, r1	; 32
-  d0:	89 b9       	out	0x09, r24	; 9
-  d2:	88 e1       	ldi	r24, 0x18	; 24
-  d4:	8a b9       	out	0x0a, r24	; 10
-  d6:	8e e8       	ldi	r24, 0x8E	; 142
-  d8:	80 bd       	out	0x20, r24	; 32
-  da:	08 95       	ret
+//===============================================================
+//                   Считывание байта по I2C
+//===============================================================
+unsigned char i2c_get_byte (unsigned char last_byte)	{	
+ 1da:	28 2f       	mov	r18, r24
+ unsigned char i, res=0;
+	I2C_DDR &= ~_BV(SDA); // отпустить SDA (лог.1)
+ 1dc:	a4 98       	cbi	0x14, 4	; 20
+ 1de:	98 e0       	ldi	r25, 0x08	; 8
 
-000000dc <Seral_write>:
-  dc:	5d 9b       	sbis	0x0b, 5	; 11
-  de:	fe cf       	rjmp	.-4      	; 0xdc <Seral_write>
-  e0:	8c b9       	out	0x0c, r24	; 12
-  e2:	08 95       	ret
+//===============================================================
+//                   Считывание байта по I2C
+//===============================================================
+unsigned char i2c_get_byte (unsigned char last_byte)	{	
+ unsigned char i, res=0;
+ 1e0:	80 e0       	ldi	r24, 0x00	; 0
+	I2C_DDR &= ~_BV(SDA); // отпустить SDA (лог.1)
 
-000000e4 <main>:
-int8_t _i2caddr = 0x19;//0x19;
+	for (i=0;i<8;i++)
+	{
+		res=res<<1;
+ 1e2:	88 0f       	add	r24, r24
+		I2C_DDR &= ~_BV(SCL); // отпустить SCL (лог.1)		//Импульс на SCL
+ 1e4:	a5 98       	cbi	0x14, 5	; 20
+ 1e6:	35 e3       	ldi	r19, 0x35	; 53
+ 1e8:	3a 95       	dec	r19
+ 1ea:	f1 f7       	brne	.-4      	; 0x1e8 <i2c_get_byte+0xe>
+ 1ec:	00 00       	nop
+		I2C_DELAY
+		if ((I2C_PIN&_BV(SDA))==_BV(SDA)) res=res|0x01; // Чтение SDA в переменную
+ 1ee:	9c 99       	sbic	0x13, 4	; 19
+ 1f0:	81 60       	ori	r24, 0x01	; 1
+		I2C_DDR |= _BV(SCL); // притянуть SCL (лог.0)
+ 1f2:	a5 9a       	sbi	0x14, 5	; 20
+ 1f4:	35 e3       	ldi	r19, 0x35	; 53
+ 1f6:	3a 95       	dec	r19
+ 1f8:	f1 f7       	brne	.-4      	; 0x1f6 <i2c_get_byte+0x1c>
+ 1fa:	00 00       	nop
+ 1fc:	91 50       	subi	r25, 0x01	; 1
+//===============================================================
+unsigned char i2c_get_byte (unsigned char last_byte)	{	
+ unsigned char i, res=0;
+	I2C_DDR &= ~_BV(SDA); // отпустить SDA (лог.1)
+
+	for (i=0;i<8;i++)
+ 1fe:	89 f7       	brne	.-30     	; 0x1e2 <i2c_get_byte+0x8>
+		if ((I2C_PIN&_BV(SDA))==_BV(SDA)) res=res|0x01; // Чтение SDA в переменную
+		I2C_DDR |= _BV(SCL); // притянуть SCL (лог.0)
+		I2C_DELAY
+	}
+
+	if (last_byte==0) I2C_DDR |= _BV(SDA); // притянуть SDA (лог.0)		// Подтверждение, ACK, будем считывать ещё один байт
+ 200:	21 11       	cpse	r18, r1
+ 202:	02 c0       	rjmp	.+4      	; 0x208 <i2c_get_byte+0x2e>
+ 204:	a4 9a       	sbi	0x14, 4	; 20
+ 206:	01 c0       	rjmp	.+2      	; 0x20a <i2c_get_byte+0x30>
+	else I2C_DDR &= ~_BV(SDA); // отпустить SDA (лог.1)					// Без подтверждения, NACK, это последний считанный байт
+ 208:	a4 98       	cbi	0x14, 4	; 20
+ 20a:	95 e3       	ldi	r25, 0x35	; 53
+ 20c:	9a 95       	dec	r25
+ 20e:	f1 f7       	brne	.-4      	; 0x20c <i2c_get_byte+0x32>
+ 210:	00 00       	nop
+	I2C_DELAY
+	I2C_DDR &= ~_BV(SCL); // отпустить SCL (лог.1)
+ 212:	a5 98       	cbi	0x14, 5	; 20
+ 214:	35 e3       	ldi	r19, 0x35	; 53
+ 216:	3a 95       	dec	r19
+ 218:	f1 f7       	brne	.-4      	; 0x216 <i2c_get_byte+0x3c>
+ 21a:	00 00       	nop
+	I2C_DELAY
+	I2C_DDR |= _BV(SCL); // притянуть SCL (лог.0)
+ 21c:	a5 9a       	sbi	0x14, 5	; 20
+ 21e:	95 e3       	ldi	r25, 0x35	; 53
+ 220:	9a 95       	dec	r25
+ 222:	f1 f7       	brne	.-4      	; 0x220 <i2c_get_byte+0x46>
+ 224:	00 00       	nop
+	I2C_DELAY
+	I2C_DDR &= ~_BV(SDA); // отпустить SDA (лог.1)
+ 226:	a4 98       	cbi	0x14, 4	; 20
+
+	return res; // вернуть считанное значение
+}
+ 228:	08 95       	ret
+
+0000022a <main>:
+int8_t _i2caddr = 0x1A;//0x19;
 int8_t who_I_am = 0xAA;
 
 int main(void)
 {
     pinMode_portB(0, OUTPUT);		// PB0 на выход
-  e4:	61 e0       	ldi	r22, 0x01	; 1
-  e6:	80 e0       	ldi	r24, 0x00	; 0
-  e8:	c8 df       	rcall	.-112    	; 0x7a <pinMode_portB>
+ 22a:	61 e0       	ldi	r22, 0x01	; 1
+ 22c:	80 e0       	ldi	r24, 0x00	; 0
+ 22e:	2d df       	rcall	.-422    	; 0x8a <pinMode_portB>
 	pinMode_portB(1, OUTPUT);		// PB1 на выход
-  ea:	61 e0       	ldi	r22, 0x01	; 1
-  ec:	81 e0       	ldi	r24, 0x01	; 1
-  ee:	c5 df       	rcall	.-118    	; 0x7a <pinMode_portB>
+ 230:	61 e0       	ldi	r22, 0x01	; 1
+ 232:	81 e0       	ldi	r24, 0x01	; 1
+ 234:	2a df       	rcall	.-428    	; 0x8a <pinMode_portB>
 	digitalWrite_portB(1, HIGH);	// PB1 в высокий уровень/ RS485 на выход
-  f0:	61 e0       	ldi	r22, 0x01	; 1
-  f2:	81 e0       	ldi	r24, 0x01	; 1
-  f4:	ac df       	rcall	.-168    	; 0x4e <digitalWrite_portB>
+ 236:	61 e0       	ldi	r22, 0x01	; 1
+ 238:	81 e0       	ldi	r24, 0x01	; 1
+ 23a:	11 df       	rcall	.-478    	; 0x5e <digitalWrite_portB>
 	
-	Seral_open(103);
-  f6:	87 e6       	ldi	r24, 0x67	; 103
-  f8:	ea df       	rcall	.-44     	; 0xce <Seral_open>
+	UART_open(103);
+ 23c:	87 e6       	ldi	r24, 0x67	; 103
+ 23e:	4f df       	rcall	.-354    	; 0xde <UART_open>
 	
 	digitalWrite_portB(0, HIGH);
-  fa:	61 e0       	ldi	r22, 0x01	; 1
-  fc:	80 e0       	ldi	r24, 0x00	; 0
-  fe:	a7 df       	rcall	.-178    	; 0x4e <digitalWrite_portB>
+ 240:	61 e0       	ldi	r22, 0x01	; 1
+ 242:	80 e0       	ldi	r24, 0x00	; 0
+ 244:	0c df       	rcall	.-488    	; 0x5e <digitalWrite_portB>
 	
 	//TWI_init_speed(250);	// 18 -> 100kHz; 250 -> 7,9 kHz
 	
-	Seral_write( 0xA0 );
- 100:	80 ea       	ldi	r24, 0xA0	; 160
- 102:	ec df       	rcall	.-40     	; 0xdc <Seral_write>
-	Seral_write( 0xA1 );
- 104:	81 ea       	ldi	r24, 0xA1	; 161
- 106:	ea df       	rcall	.-44     	; 0xdc <Seral_write>
-	Seral_write( 0xA2 );
- 108:	82 ea       	ldi	r24, 0xA2	; 162
- 10a:	e8 df       	rcall	.-48     	; 0xdc <Seral_write>
-	Seral_write( 0xA3 );
- 10c:	83 ea       	ldi	r24, 0xA3	; 163
- 10e:	e6 df       	rcall	.-52     	; 0xdc <Seral_write>
+	UART_write( 0xA0 );
+ 246:	80 ea       	ldi	r24, 0xA0	; 160
+ 248:	51 df       	rcall	.-350    	; 0xec <UART_write>
+	UART_write( 0xA1 );
+ 24a:	81 ea       	ldi	r24, 0xA1	; 161
+ 24c:	4f df       	rcall	.-354    	; 0xec <UART_write>
+	
+	i2c_programm_init(); 
+ 24e:	87 df       	rcall	.-242    	; 0x15e <i2c_programm_init>
+	
+	UART_write( 0xA2 );
+ 250:	82 ea       	ldi	r24, 0xA2	; 162
+ 252:	4c df       	rcall	.-360    	; 0xec <UART_write>
+	UART_write( 0xA3 );
+ 254:	83 ea       	ldi	r24, 0xA3	; 163
+ 256:	4a df       	rcall	.-364    	; 0xec <UART_write>
  
     while (1) 
     {
 		digitalWrite_portB(0, LOW);
- 110:	60 e0       	ldi	r22, 0x00	; 0
- 112:	80 e0       	ldi	r24, 0x00	; 0
- 114:	9c df       	rcall	.-200    	; 0x4e <digitalWrite_portB>
+ 258:	60 e0       	ldi	r22, 0x00	; 0
+ 25a:	80 e0       	ldi	r24, 0x00	; 0
+ 25c:	00 df       	rcall	.-512    	; 0x5e <digitalWrite_portB>
 		delay_counters(800000);
- 116:	60 e0       	ldi	r22, 0x00	; 0
- 118:	75 e3       	ldi	r23, 0x35	; 53
- 11a:	8c e0       	ldi	r24, 0x0C	; 12
- 11c:	90 e0       	ldi	r25, 0x00	; 0
- 11e:	c3 df       	rcall	.-122    	; 0xa6 <delay_counters>
+ 25e:	60 e0       	ldi	r22, 0x00	; 0
+ 260:	75 e3       	ldi	r23, 0x35	; 53
+ 262:	8c e0       	ldi	r24, 0x0C	; 12
+ 264:	90 e0       	ldi	r25, 0x00	; 0
+ 266:	27 df       	rcall	.-434    	; 0xb6 <delay_counters>
 
 		digitalWrite_portB(0, HIGH);
- 120:	61 e0       	ldi	r22, 0x01	; 1
- 122:	80 e0       	ldi	r24, 0x00	; 0
- 124:	94 df       	rcall	.-216    	; 0x4e <digitalWrite_portB>
+ 268:	61 e0       	ldi	r22, 0x01	; 1
+ 26a:	80 e0       	ldi	r24, 0x00	; 0
+ 26c:	f8 de       	rcall	.-528    	; 0x5e <digitalWrite_portB>
 		delay_counters(50000);
- 126:	60 e5       	ldi	r22, 0x50	; 80
- 128:	73 ec       	ldi	r23, 0xC3	; 195
- 12a:	80 e0       	ldi	r24, 0x00	; 0
- 12c:	90 e0       	ldi	r25, 0x00	; 0
- 12e:	bb df       	rcall	.-138    	; 0xa6 <delay_counters>
+ 26e:	60 e5       	ldi	r22, 0x50	; 80
+ 270:	73 ec       	ldi	r23, 0xC3	; 195
+ 272:	80 e0       	ldi	r24, 0x00	; 0
+ 274:	90 e0       	ldi	r25, 0x00	; 0
+ 276:	1f df       	rcall	.-450    	; 0xb6 <delay_counters>
 		
-		Seral_write( 0x0A );
- 130:	8a e0       	ldi	r24, 0x0A	; 10
- 132:	d4 df       	rcall	.-88     	; 0xdc <Seral_write>
- 134:	ed cf       	rjmp	.-38     	; 0x110 <main+0x2c>
+		UART_write( 0x0A );
+ 278:	8a e0       	ldi	r24, 0x0A	; 10
+ 27a:	38 df       	rcall	.-400    	; 0xec <UART_write>
+		i2c_start_cond();   // старт шины
+		i2c_send_byte (_i2caddr);   // адрес устройства, которое висит на шине
+		i2c_send_byte (LIS3DH_REG_WHOAMI);   // байт данных, который записываем в устройство
+		i2c_stop_cond();   // стоп шины
+		*/
+		i2c_restart_cond();
+ 27c:	77 df       	rcall	.-274    	; 0x16c <i2c_restart_cond>
+		i2c_send_byte (_i2caddr);  // адрес записи
+ 27e:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <_i2caddr>
+ 282:	89 df       	rcall	.-238    	; 0x196 <i2c_send_byte>
+		i2c_send_byte (LIS3DH_REG_WHOAMI);		// адрес секунд и десятков секунд (при дальнейшем чтении, адрес инкрементируется автоматически)
+ 284:	8f e0       	ldi	r24, 0x0F	; 15
+ 286:	87 df       	rcall	.-242    	; 0x196 <i2c_send_byte>
+		
+		who_I_am = i2c_get_byte(1);
+ 288:	81 e0       	ldi	r24, 0x01	; 1
+ 28a:	a7 df       	rcall	.-178    	; 0x1da <i2c_get_byte>
+ 28c:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_start>
+		
+		i2c_stop_cond();
+ 290:	31 df       	rcall	.-414    	; 0xf4 <i2c_stop_cond>
+		//who_I_am = TWI_start_read_stop(_i2caddr);
+		//UART_write( 0x02 );
+		//delay_counters(300000);
+	*/	
+		
+		UART_write( who_I_am );
+ 292:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
+ 296:	2a df       	rcall	.-428    	; 0xec <UART_write>
+ 298:	df cf       	rjmp	.-66     	; 0x258 <main+0x2e>
 
-00000136 <_exit>:
- 136:	f8 94       	cli
+0000029a <_exit>:
+ 29a:	f8 94       	cli
 
-00000138 <__stop_program>:
- 138:	ff cf       	rjmp	.-2      	; 0x138 <__stop_program>
+0000029c <__stop_program>:
+ 29c:	ff cf       	rjmp	.-2      	; 0x29c <__stop_program>
