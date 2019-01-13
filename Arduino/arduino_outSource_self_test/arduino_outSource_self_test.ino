@@ -137,4 +137,4 @@ uint8_t readRegister8(uint8_t reg) {
     Wire.requestFrom(_i2caddr, 1);
     
     return Wire.read();
-  } 
+  }
