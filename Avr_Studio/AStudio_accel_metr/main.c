@@ -8,6 +8,7 @@
 #include "Library/GPIO.h"
 #include "Library/UART_Serial.h"
 #include "Library/TWI_wire.h"
+#include "Library/i2c_master.h"
 
 #define LIS3DH_REG_OUT_X_L   0x28
 #define LIS3DH_REG_TEMPCFG   0x1F
@@ -18,12 +19,8 @@
 #define LIS3DH_REG_OUTADC3_L 0x0C
 #define LIS3DH_REG_WHOAMI    0x0F
 
-int8_t _i2caddr = 25;//0x19;
-int8_t who_I_am = 128;
-
-byte i = 0;
-uint8_t test_addr, accel_adr=129;
-uint8_t j = 0;
+int8_t _i2caddr = 0x19;//0x19;
+int8_t who_I_am = 0xAA;
 
 int main(void)
 {
@@ -35,9 +32,12 @@ int main(void)
 	
 	digitalWrite_portB(0, HIGH);
 	
- TWI_init_speed(18);	// 18 -> 100kHz
- 
-
+	//TWI_init_speed(250);	// 18 -> 100kHz; 250 -> 7,9 kHz
+	
+	Seral_write( 0xA0 );
+	Seral_write( 0xA1 );
+	Seral_write( 0xA2 );
+	Seral_write( 0xA3 );
  
     while (1) 
     {
@@ -45,36 +45,33 @@ int main(void)
 		delay_counters(800000);
 
 		digitalWrite_portB(0, HIGH);
-		//delay_counters(50000);
+		delay_counters(50000);
 		
+		Seral_write( 0x0A );
+	
+	/*
+		Seral_write( 0x00 );
+		delay_counters(300000);
+		Seral_write( _i2caddr );
+		delay_counters(300000);
+		Seral_write( LIS3DH_REG_WHOAMI );
+		delay_counters(300000);
+		Seral_write( 0xC0 );
+		delay_counters(300000);
 		
+		TWI_start_write_stop(_i2caddr, LIS3DH_REG_WHOAMI);
 		//i2c_start(_i2caddr);
-		Seral_write( 0x0 );
-		delay_counters(30000);
 		
-		//i2c_write(LIS3DH_REG_WHOAMI);
-		Seral_write( 0x1 );
-		delay_counters(30000);
+		Seral_write( 0x01 );
+		delay_counters(300000);
 		
-		//i2c_stop();
-		Seral_write( 0x2 );
-		delay_counters(30000);
-		
-		//i2c_start(_i2caddr);
-		Seral_write( 0x3 );
-		delay_counters(30000);
-		
-		//who_I_am = i2c_read_nack();
-		Seral_write( 0x4 );
-		delay_counters(30000);
-		
-		//i2c_stop();
-		Seral_write( 0x5 );
-		delay_counters(30000);
+		who_I_am = TWI_start_read_stop(_i2caddr);
+		Seral_write( 0x02 );
+		delay_counters(300000);
 		
 		
 		Seral_write( who_I_am );
-		
+	*/	
 
     }
 	return 0;
