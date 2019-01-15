@@ -41,20 +41,28 @@ Discarded input sections
                 0x00000000       0x68 i2c_master.o
  .debug_ranges  0x00000000       0x88 i2c_master.o
  .debug_line    0x00000000      0x304 i2c_master.o
- .debug_str     0x00000000      0x20d i2c_master.o
+ .debug_str     0x00000000      0x209 i2c_master.o
  .comment       0x00000000       0x31 i2c_master.o
  .debug_frame   0x00000000      0x15c i2c_master.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
  .text.TWI_init_speed
-                0x00000000        0x6 main.o
- .text.TWI_start_write_stop
-                0x00000000       0x78 main.o
- .text.TWI_start_read_stop
-                0x00000000       0x3e main.o
+                0x00000000        0x4 main.o
+ .text.i2c_stop_cond
+                0x00000000       0x6a main.o
+ .text.i2c_programm_init
+                0x00000000        0xe main.o
  .text.i2c_start_cond
                 0x00000000       0x16 main.o
+ .text.i2c_restart_cond
+                0x00000000       0x2a main.o
+ .text.i2c_send_byte
+                0x00000000       0x44 main.o
+ .text.i2c_get_byte
+                0x00000000       0x50 main.o
+ .bss.i2c_frame_error
+                0x00000000        0x1 main.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
@@ -228,7 +236,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x29e
+.text           0x00000000      0x1c2
  *(.vectors)
  .vectors       0x00000000       0x26 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8a/avr4/crtatmega8a.o
                 0x00000000                __vector_default
@@ -323,28 +331,19 @@ END GROUP
  .text.UART_write
                 0x000000ec        0x8 main.o
                 0x000000ec                UART_write
- .text.i2c_stop_cond
-                0x000000f4       0x6a main.o
-                0x000000f4                i2c_stop_cond
- .text.i2c_programm_init
-                0x0000015e        0xe main.o
-                0x0000015e                i2c_programm_init
- .text.i2c_restart_cond
-                0x0000016c       0x2a main.o
-                0x0000016c                i2c_restart_cond
- .text.i2c_send_byte
-                0x00000196       0x44 main.o
-                0x00000196                i2c_send_byte
- .text.i2c_get_byte
-                0x000001da       0x50 main.o
-                0x000001da                i2c_get_byte
- .text.main     0x0000022a       0x70 main.o
-                0x0000022a                main
-                0x0000029a                . = ALIGN (0x2)
+ .text.TWI_start_write_stop
+                0x000000f4       0x2c main.o
+                0x000000f4                TWI_start_write_stop
+ .text.TWI_start_read_stop
+                0x00000120       0x2e main.o
+                0x00000120                TWI_start_read_stop
+ .text.main     0x0000014e       0x70 main.o
+                0x0000014e                main
+                0x000001be                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000029a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
-                0x0000029a                _exit
-                0x0000029a                exit
+ .fini9         0x000001be        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
+                0x000001be                _exit
+                0x000001be                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -363,11 +362,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000029a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
+ .fini0         0x000001be        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr4\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000029e                _etext = .
+                0x000001c2                _etext = .
 
-.data           0x00800060        0x2 load address 0x0000029e
+.data           0x00800060        0x2 load address 0x000001c2
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -385,23 +384,20 @@ END GROUP
                 0x00800062                _edata = .
                 0x00800062                PROVIDE (__data_end, .)
 
-.bss            0x00800062        0x1
+.bss            0x00800062        0x0
                 0x00800062                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.i2c_frame_error
-                0x00800062        0x1 main.o
-                0x00800062                i2c_frame_error
  *(COMMON)
-                0x00800063                PROVIDE (__bss_end, .)
-                0x0000029e                __data_load_start = LOADADDR (.data)
-                0x000002a0                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800062                PROVIDE (__bss_end, .)
+                0x000001c2                __data_load_start = LOADADDR (.data)
+                0x000001c4                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800063        0x0
+.noinit         0x00800062        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800063                _end = .
+                0x00800062                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -474,34 +470,34 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x10ca
+.debug_info     0x00000000      0xf74
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x48c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8a/avr4/crtatmega8a.o
- .debug_info    0x0000048c      0xc3e main.o
+ .debug_info    0x0000048c      0xae8 main.o
 
-.debug_abbrev   0x00000000      0x62f
+.debug_abbrev   0x00000000      0x61c
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x44e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8a/avr4/crtatmega8a.o
- .debug_abbrev  0x0000044e      0x1e1 main.o
+ .debug_abbrev  0x0000044e      0x1ce main.o
 
-.debug_line     0x00000000      0x779
+.debug_line     0x00000000      0x71e
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x109 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8a/avr4/crtatmega8a.o
- .debug_line    0x00000109      0x670 main.o
+ .debug_line    0x00000109      0x615 main.o
 
-.debug_frame    0x00000000      0x114
+.debug_frame    0x00000000      0x104
  *(.debug_frame)
- .debug_frame   0x00000000      0x114 main.o
+ .debug_frame   0x00000000      0x104 main.o
 
-.debug_str      0x00000000      0x45a
+.debug_str      0x00000000      0x456
  *(.debug_str)
  .debug_str     0x00000000      0x17a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega8a/avr4/crtatmega8a.o
- .debug_str     0x0000017a      0x2e0 main.o
-                                0x326 (size before relaxing)
+ .debug_str     0x0000017a      0x2dc main.o
+                                0x322 (size before relaxing)
 
-.debug_loc      0x00000000      0x91d
+.debug_loc      0x00000000      0x8b7
  *(.debug_loc)
- .debug_loc     0x00000000      0x91d main.o
+ .debug_loc     0x00000000      0x8b7 main.o
 
 .debug_macinfo
  *(.debug_macinfo)
