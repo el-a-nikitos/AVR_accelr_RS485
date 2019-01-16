@@ -3,29 +3,31 @@ AStudio_accel_metr.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000001c2  00000000  00000000  00000074  2**1
+  0 .text         0000029c  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000002  00800060  000001c2  00000236  2**0
+  1 .data         00000004  00800060  0000029c  00000330  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  00000238  2**0
+  2 .bss          00000006  00800064  00800064  00000334  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000334  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000268  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000364  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000090  00000000  00000000  000002a4  2**0
+  5 .debug_aranges 00000070  00000000  00000000  000003a0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000f74  00000000  00000000  00000334  2**0
+  6 .debug_info   00000b0d  00000000  00000000  00000410  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000061c  00000000  00000000  000012a8  2**0
+  7 .debug_abbrev 000005dd  00000000  00000000  00000f1d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000071e  00000000  00000000  000018c4  2**0
+  8 .debug_line   000005c8  00000000  00000000  000014fa  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000104  00000000  00000000  00001fe4  2**2
+  9 .debug_frame  000000c4  00000000  00000000  00001ac4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000456  00000000  00000000  000020e8  2**0
+ 10 .debug_str    000003f3  00000000  00000000  00001b88  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000008b7  00000000  00000000  0000253e  2**0
+ 11 .debug_loc    00000219  00000000  00000000  00001f7b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000080  00000000  00000000  00002df5  2**0
+ 12 .debug_ranges 00000060  00000000  00000000  00002194  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -63,18 +65,18 @@ Disassembly of section .text:
   32:	10 e0       	ldi	r17, 0x00	; 0
   34:	a0 e6       	ldi	r26, 0x60	; 96
   36:	b0 e0       	ldi	r27, 0x00	; 0
-  38:	e2 ec       	ldi	r30, 0xC2	; 194
-  3a:	f1 e0       	ldi	r31, 0x01	; 1
+  38:	ec e9       	ldi	r30, 0x9C	; 156
+  3a:	f2 e0       	ldi	r31, 0x02	; 2
   3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
   3e:	05 90       	lpm	r0, Z+
   40:	0d 92       	st	X+, r0
-  42:	a2 36       	cpi	r26, 0x62	; 98
+  42:	a4 36       	cpi	r26, 0x64	; 100
   44:	b1 07       	cpc	r27, r17
   46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
 
 00000048 <__do_clear_bss>:
   48:	20 e0       	ldi	r18, 0x00	; 0
-  4a:	a2 e6       	ldi	r26, 0x62	; 98
+  4a:	a4 e6       	ldi	r26, 0x64	; 100
   4c:	b0 e0       	ldi	r27, 0x00	; 0
   4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
 
@@ -82,21 +84,21 @@ Disassembly of section .text:
   50:	1d 92       	st	X+, r1
 
 00000052 <.do_clear_bss_start>:
-  52:	a2 36       	cpi	r26, 0x62	; 98
+  52:	aa 36       	cpi	r26, 0x6A	; 106
   54:	b2 07       	cpc	r27, r18
   56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
-  58:	7a d0       	rcall	.+244    	; 0x14e <main>
-  5a:	b1 c0       	rjmp	.+354    	; 0x1be <_exit>
+  58:	98 d0       	rcall	.+304    	; 0x18a <main>
+  5a:	1e c1       	rjmp	.+572    	; 0x298 <_exit>
 
 0000005c <__bad_interrupt>:
   5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
 
 0000005e <digitalWrite_portB>:
-	I2C_DDR |= _BV(SCL); // притянуть SCL (лог.0)
-	I2C_DELAY
-	I2C_DDR &= ~_BV(SDA); // отпустить SDA (лог.1)
+	DATA = TWDR;
 
-	return res; // вернуть считанное значение
+	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);
+	
+	return DATA;
 }
   5e:	96 2f       	mov	r25, r22
   60:	68 b3       	in	r22, 0x18	; 24
@@ -182,156 +184,307 @@ Disassembly of section .text:
   f0:	8c b9       	out	0x0c, r24	; 12
   f2:	08 95       	ret
 
-000000f4 <TWI_start_write_stop>:
-  f4:	16 be       	out	0x36, r1	; 54
-  f6:	94 ea       	ldi	r25, 0xA4	; 164
-  f8:	96 bf       	out	0x36, r25	; 54
-  fa:	06 b6       	in	r0, 0x36	; 54
-  fc:	07 fe       	sbrs	r0, 7
-  fe:	fd cf       	rjmp	.-6      	; 0xfa <TWI_start_write_stop+0x6>
- 100:	88 0f       	add	r24, r24
- 102:	83 b9       	out	0x03, r24	; 3
- 104:	84 e8       	ldi	r24, 0x84	; 132
- 106:	86 bf       	out	0x36, r24	; 54
- 108:	06 b6       	in	r0, 0x36	; 54
- 10a:	07 fe       	sbrs	r0, 7
- 10c:	fd cf       	rjmp	.-6      	; 0x108 <TWI_start_write_stop+0x14>
- 10e:	63 b9       	out	0x03, r22	; 3
- 110:	84 e8       	ldi	r24, 0x84	; 132
- 112:	86 bf       	out	0x36, r24	; 54
- 114:	06 b6       	in	r0, 0x36	; 54
- 116:	07 fe       	sbrs	r0, 7
- 118:	fd cf       	rjmp	.-6      	; 0x114 <TWI_start_write_stop+0x20>
- 11a:	84 e9       	ldi	r24, 0x94	; 148
- 11c:	86 bf       	out	0x36, r24	; 54
- 11e:	08 95       	ret
+000000f4 <TWI_write_byte>:
+  f4:	8f 77       	andi	r24, 0x7F	; 127
+  f6:	16 be       	out	0x36, r1	; 54
+  f8:	94 ea       	ldi	r25, 0xA4	; 164
+  fa:	96 bf       	out	0x36, r25	; 54
+  fc:	06 b6       	in	r0, 0x36	; 54
+  fe:	07 fe       	sbrs	r0, 7
+ 100:	fd cf       	rjmp	.-6      	; 0xfc <TWI_write_byte+0x8>
+ 102:	88 0f       	add	r24, r24
+ 104:	83 b9       	out	0x03, r24	; 3
+ 106:	84 e8       	ldi	r24, 0x84	; 132
+ 108:	86 bf       	out	0x36, r24	; 54
+ 10a:	06 b6       	in	r0, 0x36	; 54
+ 10c:	07 fe       	sbrs	r0, 7
+ 10e:	fd cf       	rjmp	.-6      	; 0x10a <TWI_write_byte+0x16>
+ 110:	63 b9       	out	0x03, r22	; 3
+ 112:	84 e8       	ldi	r24, 0x84	; 132
+ 114:	86 bf       	out	0x36, r24	; 54
+ 116:	06 b6       	in	r0, 0x36	; 54
+ 118:	07 fe       	sbrs	r0, 7
+ 11a:	fd cf       	rjmp	.-6      	; 0x116 <TWI_write_byte+0x22>
+ 11c:	43 b9       	out	0x03, r20	; 3
+ 11e:	84 e8       	ldi	r24, 0x84	; 132
+ 120:	86 bf       	out	0x36, r24	; 54
+ 122:	06 b6       	in	r0, 0x36	; 54
+ 124:	07 fe       	sbrs	r0, 7
+ 126:	fd cf       	rjmp	.-6      	; 0x122 <TWI_write_byte+0x2e>
+ 128:	84 e9       	ldi	r24, 0x94	; 148
+ 12a:	86 bf       	out	0x36, r24	; 54
+ 12c:	08 95       	ret
 
-00000120 <TWI_start_read_stop>:
- 120:	16 be       	out	0x36, r1	; 54
- 122:	94 ea       	ldi	r25, 0xA4	; 164
- 124:	96 bf       	out	0x36, r25	; 54
- 126:	06 b6       	in	r0, 0x36	; 54
- 128:	07 fe       	sbrs	r0, 7
- 12a:	fd cf       	rjmp	.-6      	; 0x126 <TWI_start_read_stop+0x6>
- 12c:	88 0f       	add	r24, r24
- 12e:	81 60       	ori	r24, 0x01	; 1
- 130:	83 b9       	out	0x03, r24	; 3
- 132:	84 e8       	ldi	r24, 0x84	; 132
- 134:	86 bf       	out	0x36, r24	; 54
+0000012e <TWI_read_byte>:
+
+uint8_t TWI_read_byte(uint8_t addres, uint8_t REG)	{
+	uint8_t READ_BYTE = 0;
+	addres = addres&(0b01111111);
+ 12e:	8f 77       	andi	r24, 0x7F	; 127
+	
+	TWCR = 0;
+ 130:	16 be       	out	0x36, r1	; 54
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 132:	94 ea       	ldi	r25, 0xA4	; 164
+ 134:	96 bf       	out	0x36, r25	; 54
+	      //запуск TWI / TWI мастер / TWI включен
+	while( !(TWCR & (1<<TWINT)) );
  136:	06 b6       	in	r0, 0x36	; 54
  138:	07 fe       	sbrs	r0, 7
- 13a:	fd cf       	rjmp	.-6      	; 0x136 <TWI_start_read_stop+0x16>
- 13c:	84 e8       	ldi	r24, 0x84	; 132
- 13e:	86 bf       	out	0x36, r24	; 54
- 140:	06 b6       	in	r0, 0x36	; 54
- 142:	07 fe       	sbrs	r0, 7
- 144:	fd cf       	rjmp	.-6      	; 0x140 <TWI_start_read_stop+0x20>
- 146:	83 b1       	in	r24, 0x03	; 3
- 148:	94 e9       	ldi	r25, 0x94	; 148
- 14a:	96 bf       	out	0x36, r25	; 54
- 14c:	08 95       	ret
+ 13a:	fd cf       	rjmp	.-6      	; 0x136 <TWI_read_byte+0x8>
+	// проверка, что TWINT сброшен, т.е. операция выполнена
+	/*
+	тут должна быть проверка регистров статуса
+	*/
+	TWDR = (addres<<1)|(0<<0);
+ 13c:	98 2f       	mov	r25, r24
+ 13e:	99 0f       	add	r25, r25
+ 140:	93 b9       	out	0x03, r25	; 3
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 142:	94 e8       	ldi	r25, 0x84	; 132
+ 144:	96 bf       	out	0x36, r25	; 54
+		  //запуск TWI
+	while( !(TWCR & (1<<TWINT)) );
+ 146:	06 b6       	in	r0, 0x36	; 54
+ 148:	07 fe       	sbrs	r0, 7
+ 14a:	fd cf       	rjmp	.-6      	; 0x146 <TWI_read_byte+0x18>
+	// проверка, что TWINT выставлен, т.е. операция выполнена
+	/*
+	тут тоже должна быть проверка регистров статуса
+	*/
+	TWDR = REG;
+ 14c:	63 b9       	out	0x03, r22	; 3
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 14e:	94 e8       	ldi	r25, 0x84	; 132
+ 150:	96 bf       	out	0x36, r25	; 54
+	while( !(TWCR & (1<<TWINT)) );
+ 152:	06 b6       	in	r0, 0x36	; 54
+ 154:	07 fe       	sbrs	r0, 7
+ 156:	fd cf       	rjmp	.-6      	; 0x152 <TWI_read_byte+0x24>
+	/*
+	тут тоже должна быть проверка регистров статуса
+	*/
+	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);
+ 158:	94 e9       	ldi	r25, 0x94	; 148
+ 15a:	96 bf       	out	0x36, r25	; 54
+	
+	TWCR = 0;
+ 15c:	16 be       	out	0x36, r1	; 54
+	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
+ 15e:	94 ea       	ldi	r25, 0xA4	; 164
+ 160:	96 bf       	out	0x36, r25	; 54
+	//запуск TWI / TWI мастер / TWI включен
+	while( !(TWCR & (1<<TWINT)) );
+ 162:	06 b6       	in	r0, 0x36	; 54
+ 164:	07 fe       	sbrs	r0, 7
+ 166:	fd cf       	rjmp	.-6      	; 0x162 <TWI_read_byte+0x34>
+	
+	// старт при чтении
+	TWDR = (addres<<1)|(1<<0);
+ 168:	88 0f       	add	r24, r24
+ 16a:	81 60       	ori	r24, 0x01	; 1
+ 16c:	83 b9       	out	0x03, r24	; 3
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 16e:	84 e8       	ldi	r24, 0x84	; 132
+ 170:	86 bf       	out	0x36, r24	; 54
 
-0000014e <main>:
-int8_t _i2caddr = 0x19;
-int8_t who_I_am = 0xAA;
+	while( !(TWCR & (1<<TWINT)) );
+ 172:	06 b6       	in	r0, 0x36	; 54
+ 174:	07 fe       	sbrs	r0, 7
+ 176:	fd cf       	rjmp	.-6      	; 0x172 <TWI_read_byte+0x44>
+	// проверка, что TWINT выставлен, т.е. операция выполнена
+	TWCR = (1<<TWINT) | (1<<TWEN);
+ 178:	84 e8       	ldi	r24, 0x84	; 132
+ 17a:	86 bf       	out	0x36, r24	; 54
+	while( !(TWCR & (1<<TWINT)) );
+ 17c:	06 b6       	in	r0, 0x36	; 54
+ 17e:	07 fe       	sbrs	r0, 7
+ 180:	fd cf       	rjmp	.-6      	; 0x17c <TWI_read_byte+0x4e>
+	
+	READ_BYTE = TWDR;
+ 182:	83 b1       	in	r24, 0x03	; 3
+
+	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);
+ 184:	94 e9       	ldi	r25, 0x94	; 148
+ 186:	96 bf       	out	0x36, r25	; 54
+	
+	return READ_BYTE;
+ 188:	08 95       	ret
+
+0000018a <main>:
+int8_t who_I_am = 0xAA, Temp_H = 0xFF, Temp_L = 0xFF;
+int8_t aX_L = 0, aX_H = 0, aY_L = 0, aY_H = 0, aZ_L = 0, aZ_H = 0;
 
 int main(void)
 {
     pinMode_portB(0, OUTPUT);		// PB0 на выход
- 14e:	61 e0       	ldi	r22, 0x01	; 1
- 150:	80 e0       	ldi	r24, 0x00	; 0
- 152:	9b df       	rcall	.-202    	; 0x8a <pinMode_portB>
+ 18a:	61 e0       	ldi	r22, 0x01	; 1
+ 18c:	80 e0       	ldi	r24, 0x00	; 0
+ 18e:	7d df       	rcall	.-262    	; 0x8a <pinMode_portB>
 	pinMode_portB(1, OUTPUT);		// PB1 на выход
- 154:	61 e0       	ldi	r22, 0x01	; 1
- 156:	81 e0       	ldi	r24, 0x01	; 1
- 158:	98 df       	rcall	.-208    	; 0x8a <pinMode_portB>
+ 190:	61 e0       	ldi	r22, 0x01	; 1
+ 192:	81 e0       	ldi	r24, 0x01	; 1
+ 194:	7a df       	rcall	.-268    	; 0x8a <pinMode_portB>
 	digitalWrite_portB(1, HIGH);	// PB1 в высокий уровень/ RS485 на выход
- 15a:	61 e0       	ldi	r22, 0x01	; 1
- 15c:	81 e0       	ldi	r24, 0x01	; 1
- 15e:	7f df       	rcall	.-258    	; 0x5e <digitalWrite_portB>
+ 196:	61 e0       	ldi	r22, 0x01	; 1
+ 198:	81 e0       	ldi	r24, 0x01	; 1
+ 19a:	61 df       	rcall	.-318    	; 0x5e <digitalWrite_portB>
 	
 	UART_open(103);
- 160:	87 e6       	ldi	r24, 0x67	; 103
- 162:	bd df       	rcall	.-134    	; 0xde <UART_open>
+ 19c:	87 e6       	ldi	r24, 0x67	; 103
+ 19e:	9f df       	rcall	.-194    	; 0xde <UART_open>
 	
 	digitalWrite_portB(0, HIGH);
- 164:	61 e0       	ldi	r22, 0x01	; 1
- 166:	80 e0       	ldi	r24, 0x00	; 0
- 168:	7a df       	rcall	.-268    	; 0x5e <digitalWrite_portB>
+ 1a0:	61 e0       	ldi	r22, 0x01	; 1
+ 1a2:	80 e0       	ldi	r24, 0x00	; 0
+ 1a4:	5c df       	rcall	.-328    	; 0x5e <digitalWrite_portB>
  * Author : mini
  */ 
-#include <util/twi.h>
+//#include <util/twi.h>
 
 void TWI_init_speed(uint8_t prescal)	{
 	TWBR = prescal;
- 16a:	8f e5       	ldi	r24, 0x5F	; 95
- 16c:	80 b9       	out	0x00, r24	; 0
+ 1a6:	8f e5       	ldi	r24, 0x5F	; 95
+ 1a8:	80 b9       	out	0x00, r24	; 0
 	
 	TWI_init_speed(95);	// 18 -> 100kHz; 250 -> 7,9 kHz
 	
-	UART_write( 0xA0 );
- 16e:	80 ea       	ldi	r24, 0xA0	; 160
- 170:	bd df       	rcall	.-134    	; 0xec <UART_write>
-	UART_write( 0xA1 );
- 172:	81 ea       	ldi	r24, 0xA1	; 161
- 174:	bb df       	rcall	.-138    	; 0xec <UART_write>
-	
-	//i2c_programm_init(); 
-	
-	UART_write( 0xA2 );
- 176:	82 ea       	ldi	r24, 0xA2	; 162
- 178:	b9 df       	rcall	.-142    	; 0xec <UART_write>
-	UART_write( 0xA3 );
- 17a:	83 ea       	ldi	r24, 0xA3	; 163
- 17c:	b7 df       	rcall	.-146    	; 0xec <UART_write>
+	TWI_write_byte(_i2caddr, LIS3DH_REG_TEMPCFG, 0b11000000);
+ 1aa:	40 ec       	ldi	r20, 0xC0	; 192
+ 1ac:	6f e1       	ldi	r22, 0x1F	; 31
+ 1ae:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 1b2:	a0 df       	rcall	.-192    	; 0xf4 <TWI_write_byte>
+	TWI_write_byte(_i2caddr, LIS3DH_REG_CTRL1, 0b10010111);
+ 1b4:	47 e9       	ldi	r20, 0x97	; 151
+ 1b6:	60 e2       	ldi	r22, 0x20	; 32
+ 1b8:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 1bc:	9b df       	rcall	.-202    	; 0xf4 <TWI_write_byte>
+	TWI_write_byte(_i2caddr, LIS3DH_REG_CTRL3, 0b00010000);
+ 1be:	40 e1       	ldi	r20, 0x10	; 16
+ 1c0:	62 e2       	ldi	r22, 0x22	; 34
+ 1c2:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 1c6:	96 df       	rcall	.-212    	; 0xf4 <TWI_write_byte>
+	TWI_write_byte(_i2caddr, LIS3DH_REG_CTRL4, 0b10110000);
+ 1c8:	40 eb       	ldi	r20, 0xB0	; 176
+ 1ca:	63 e2       	ldi	r22, 0x23	; 35
+ 1cc:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 1d0:	91 df       	rcall	.-222    	; 0xf4 <TWI_write_byte>
  
     while (1) 
     {
 		digitalWrite_portB(0, LOW);
- 17e:	60 e0       	ldi	r22, 0x00	; 0
- 180:	80 e0       	ldi	r24, 0x00	; 0
- 182:	6d df       	rcall	.-294    	; 0x5e <digitalWrite_portB>
-		delay_counters(800000);
- 184:	60 e0       	ldi	r22, 0x00	; 0
- 186:	75 e3       	ldi	r23, 0x35	; 53
- 188:	8c e0       	ldi	r24, 0x0C	; 12
- 18a:	90 e0       	ldi	r25, 0x00	; 0
- 18c:	94 df       	rcall	.-216    	; 0xb6 <delay_counters>
+ 1d2:	60 e0       	ldi	r22, 0x00	; 0
+ 1d4:	80 e0       	ldi	r24, 0x00	; 0
+ 1d6:	43 df       	rcall	.-378    	; 0x5e <digitalWrite_portB>
+		delay_counters(1000000);
+ 1d8:	60 e4       	ldi	r22, 0x40	; 64
+ 1da:	72 e4       	ldi	r23, 0x42	; 66
+ 1dc:	8f e0       	ldi	r24, 0x0F	; 15
+ 1de:	90 e0       	ldi	r25, 0x00	; 0
+ 1e0:	6a df       	rcall	.-300    	; 0xb6 <delay_counters>
 
 		digitalWrite_portB(0, HIGH);
- 18e:	61 e0       	ldi	r22, 0x01	; 1
- 190:	80 e0       	ldi	r24, 0x00	; 0
- 192:	65 df       	rcall	.-310    	; 0x5e <digitalWrite_portB>
+ 1e2:	61 e0       	ldi	r22, 0x01	; 1
+ 1e4:	80 e0       	ldi	r24, 0x00	; 0
+ 1e6:	3b df       	rcall	.-394    	; 0x5e <digitalWrite_portB>
 		delay_counters(50000);
- 194:	60 e5       	ldi	r22, 0x50	; 80
- 196:	73 ec       	ldi	r23, 0xC3	; 195
- 198:	80 e0       	ldi	r24, 0x00	; 0
- 19a:	90 e0       	ldi	r25, 0x00	; 0
- 19c:	8c df       	rcall	.-232    	; 0xb6 <delay_counters>
+ 1e8:	60 e5       	ldi	r22, 0x50	; 80
+ 1ea:	73 ec       	ldi	r23, 0xC3	; 195
+ 1ec:	80 e0       	ldi	r24, 0x00	; 0
+ 1ee:	90 e0       	ldi	r25, 0x00	; 0
+ 1f0:	62 df       	rcall	.-316    	; 0xb6 <delay_counters>
 		
-		TWI_start_write_stop(_i2caddr, LIS3DH_REG_WHOAMI);
- 19e:	6f e0       	ldi	r22, 0x0F	; 15
- 1a0:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <_i2caddr>
- 1a4:	a7 df       	rcall	.-178    	; 0xf4 <TWI_start_write_stop>
-
-		delay_counters(200);
- 1a6:	68 ec       	ldi	r22, 0xC8	; 200
- 1a8:	70 e0       	ldi	r23, 0x00	; 0
- 1aa:	80 e0       	ldi	r24, 0x00	; 0
- 1ac:	90 e0       	ldi	r25, 0x00	; 0
- 1ae:	83 df       	rcall	.-250    	; 0xb6 <delay_counters>
-
-		who_I_am = TWI_start_read_stop(_i2caddr);
- 1b0:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <_i2caddr>
- 1b4:	b5 df       	rcall	.-150    	; 0x120 <TWI_start_read_stop>
- 1b6:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_start>
+		//TWI_start_write_stop(_i2caddr, LIS3DH_REG_WHOAMI);
+		//who_I_am = TWI_start_read_stop(_i2caddr);
+		who_I_am = TWI_read_byte(_i2caddr, LIS3DH_REG_WHOAMI);
+ 1f2:	6f e0       	ldi	r22, 0x0F	; 15
+ 1f4:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 1f8:	9a df       	rcall	.-204    	; 0x12e <TWI_read_byte>
+ 1fa:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <who_I_am>
+		
+		Temp_H = TWI_read_byte(_i2caddr, LIS3DH_REG_OUTADC3_H);
+ 1fe:	6d e0       	ldi	r22, 0x0D	; 13
+ 200:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 204:	94 df       	rcall	.-216    	; 0x12e <TWI_read_byte>
+ 206:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <Temp_H>
+		
+		aX_L = TWI_read_byte(_i2caddr, LIS3DH_REG_OUT_X_L);
+ 20a:	68 e2       	ldi	r22, 0x28	; 40
+ 20c:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 210:	8e df       	rcall	.-228    	; 0x12e <TWI_read_byte>
+ 212:	80 93 69 00 	sts	0x0069, r24	; 0x800069 <aX_L>
+		aX_H = TWI_read_byte(_i2caddr, LIS3DH_REG_OUT_X_H);
+ 216:	69 e2       	ldi	r22, 0x29	; 41
+ 218:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 21c:	88 df       	rcall	.-240    	; 0x12e <TWI_read_byte>
+ 21e:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <aX_H>
+		aY_L = TWI_read_byte(_i2caddr, LIS3DH_REG_OUT_Y_L);
+ 222:	6a e2       	ldi	r22, 0x2A	; 42
+ 224:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 228:	82 df       	rcall	.-252    	; 0x12e <TWI_read_byte>
+ 22a:	80 93 67 00 	sts	0x0067, r24	; 0x800067 <aY_L>
+		aY_H = TWI_read_byte(_i2caddr, LIS3DH_REG_OUT_Y_H);
+ 22e:	6b e2       	ldi	r22, 0x2B	; 43
+ 230:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 234:	7c df       	rcall	.-264    	; 0x12e <TWI_read_byte>
+ 236:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <aY_H>
+		aZ_L = TWI_read_byte(_i2caddr, LIS3DH_REG_OUT_Z_L);
+ 23a:	6c e2       	ldi	r22, 0x2C	; 44
+ 23c:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 240:	76 df       	rcall	.-276    	; 0x12e <TWI_read_byte>
+ 242:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <aZ_L>
+		aZ_H = TWI_read_byte(_i2caddr, LIS3DH_REG_OUT_Z_H);
+ 246:	6d e2       	ldi	r22, 0x2D	; 45
+ 248:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <_i2caddr>
+ 24c:	70 df       	rcall	.-288    	; 0x12e <TWI_read_byte>
+ 24e:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <__data_end>
 		
 		UART_write( who_I_am );
- 1ba:	98 df       	rcall	.-208    	; 0xec <UART_write>
- 1bc:	e0 cf       	rjmp	.-64     	; 0x17e <main+0x30>
+ 252:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <who_I_am>
+ 256:	4a df       	rcall	.-364    	; 0xec <UART_write>
+		UART_write( Temp_H );
+ 258:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <Temp_H>
+ 25c:	47 df       	rcall	.-370    	; 0xec <UART_write>
+		
+		
+		UART_write( 100 );
+ 25e:	84 e6       	ldi	r24, 0x64	; 100
+ 260:	45 df       	rcall	.-374    	; 0xec <UART_write>
+		UART_write( aX_L );
+ 262:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <aX_L>
+ 266:	42 df       	rcall	.-380    	; 0xec <UART_write>
+		UART_write( aX_H );
+ 268:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <aX_H>
+ 26c:	3f df       	rcall	.-386    	; 0xec <UART_write>
+		
+		UART_write( 101 );
+ 26e:	85 e6       	ldi	r24, 0x65	; 101
+ 270:	3d df       	rcall	.-390    	; 0xec <UART_write>
+		UART_write( aY_L );
+ 272:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <aY_L>
+ 276:	3a df       	rcall	.-396    	; 0xec <UART_write>
+		UART_write( aY_H );
+ 278:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <aY_H>
+ 27c:	37 df       	rcall	.-402    	; 0xec <UART_write>
+		
+		UART_write( 102 );
+ 27e:	86 e6       	ldi	r24, 0x66	; 102
+ 280:	35 df       	rcall	.-406    	; 0xec <UART_write>
+		UART_write( aZ_L );
+ 282:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <aZ_L>
+ 286:	32 df       	rcall	.-412    	; 0xec <UART_write>
+		UART_write( aZ_H );
+ 288:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <__data_end>
+ 28c:	2f df       	rcall	.-418    	; 0xec <UART_write>
+		
+		UART_write( who_I_am + 1 );
+ 28e:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <who_I_am>
+ 292:	8f 5f       	subi	r24, 0xFF	; 255
+ 294:	2b df       	rcall	.-426    	; 0xec <UART_write>
+ 296:	9d cf       	rjmp	.-198    	; 0x1d2 <main+0x48>
 
-000001be <_exit>:
- 1be:	f8 94       	cli
+00000298 <_exit>:
+ 298:	f8 94       	cli
 
-000001c0 <__stop_program>:
- 1c0:	ff cf       	rjmp	.-2      	; 0x1c0 <__stop_program>
+0000029a <__stop_program>:
+ 29a:	ff cf       	rjmp	.-2      	; 0x29a <__stop_program>

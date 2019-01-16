@@ -15,7 +15,6 @@ typedef enum enumLevel	{
 
 #include <avr/io.h>
 
-
 void digitalWrite_portB(byte byteNumber, enumLevel Level)	{
 	byte byteBuferPort = PORTB;
 	byteBuferPort &= ~(HIGH<<byteNumber);
