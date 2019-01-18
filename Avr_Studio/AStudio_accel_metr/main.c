@@ -42,20 +42,57 @@ int main(void)
 	TWI_init_speed(95);	// 18 -> 100kHz; 250 -> 7,9 kHz
 	
 	TWI_write_byte(_i2caddr, LIS3DH_REG_TEMPCFG, 0b11000000);
+	/*
+	LIS3DH_REG_TEMPCFG:	7->ADC_enable 
+						6->Temp_enable 
+						5->zero 
+						4->zero 
+						3->zero 
+						2->zero 
+						1->zero 
+						0->zero
+						*/
 	TWI_write_byte(_i2caddr, LIS3DH_REG_CTRL1, 0b10010111);
+	/*
+	LIS3DH_REG_TEMPCFG:	7->Data rate.3	speed 
+						6->Data rate.2
+						5->Data rate.1
+						4->Data rate.0 
+						3->Low power mode
+						2->Z-axis enable
+						1->Y-axis enable
+						0->X-axis enable
+						*/
 	TWI_write_byte(_i2caddr, LIS3DH_REG_CTRL3, 0b00010000);
+	/*
+	LIS3DH_REG_TEMPCFG:	7->Clck INT1 interrupt
+						6->AOI1 INT1 interrupt
+						5->AOI2 INT1 interrupt
+						4->DRDY1 INT1 interrupt
+						3->DRDY2 INT1 interrupt
+						2->FIFO Wtermark INT1 interrupt
+						1->FIFO overrun INT1 interrupt
+						0->zero
+						*/
 	TWI_write_byte(_i2caddr, LIS3DH_REG_CTRL4, 0b10110000);
- 
+	/*
+	LIS3DH_REG_TEMPCFG:	7->Output register not update/ whle read MSB LSB
+						6->Big/little endian data
+						5->full_scale.1
+						4->full_scale.2
+						3->High resolution
+						2->self_test.1
+						1->self_test.0
+						0->SPI mode
+						*/
     while (1) 
     {
 		digitalWrite_portB(0, LOW);
-		delay_counters(1000000);
+		delay_counters(400000);
 
 		digitalWrite_portB(0, HIGH);
-		delay_counters(50000);
+		delay_counters(30000);
 		
-		//TWI_start_write_stop(_i2caddr, LIS3DH_REG_WHOAMI);
-		//who_I_am = TWI_start_read_stop(_i2caddr);
 		who_I_am = TWI_read_byte(_i2caddr, LIS3DH_REG_WHOAMI);
 		
 		Temp_H = TWI_read_byte(_i2caddr, LIS3DH_REG_OUTADC3_H);
@@ -84,7 +121,6 @@ int main(void)
 		UART_write( aZ_H );
 		
 		UART_write( who_I_am + 1 );
-		
 		
     }
 	return 0;

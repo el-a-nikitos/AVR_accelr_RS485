@@ -1,17 +1,19 @@
 import processing.serial.*;
 
-Serial COMport = new Serial(this, "COM7", 9600);
+Serial COMport = new Serial(this, "COM8", 9600);
 
-int Temp, aX_L, aX_H, aY_L, aY_H, aZ_L, aZ_H;
-float aX, aY, aZ;
+byte Temp, aX_L, aX_H, aY_L, aY_H, aZ_L, aZ_H;
+float aX, aY, aZ, aXmid, aYmid, aZmid, alpha = 0.1;
+float kx = 1, ky = 1, kz = 9.81/10.8;
 boolean recive = false;
+int count = 0;
 
 void setup()  {
   
   //WINDOW
   size(800,600);
   background(100);
-  frameRate(15);
+  frameRate(30);
 }
 
 void draw()  {
@@ -19,21 +21,27 @@ void draw()  {
   if (COMport.available()>0)  {
     if ( ( COMport.read() )==51 )  {
       recive = true;
+    } else  {
+      background(100);
+      text("не поймали "+count+" раз",width*0.1,height*0.05*1);
+      count++;
     }
   }
   
   if (recive)  {
     if ( (COMport.available()) == 11 )  {
-      Temp = COMport.read();
+      count = 0;
+      
+      Temp = byte( COMport.read() );
       int trip01 = COMport.read();
-      aX_L = COMport.read();
-      aX_H = COMport.read();
+      aX_L = byte( COMport.read() );
+      aX_H = byte( COMport.read() );
       int trip02 = COMport.read();
-      aY_L = COMport.read();
-      aY_H = COMport.read();
+      aY_L = byte( COMport.read() );
+      aY_H = byte( COMport.read() );
       int trip03 = COMport.read();
-      aZ_L = COMport.read();
-      aZ_H = COMport.read();
+      aZ_L = byte( COMport.read() );
+      aZ_H = byte( COMport.read() );
       int trip04 = COMport.read();
       
       background(100);
@@ -51,21 +59,29 @@ void draw()  {
       
       recive = false;
       
-      aX = float( (aX_L + aX_H)/32 );
-      aX = aX *32*9.81/1024;
+      aX = float( getFullData(aX_L, aX_H) );
+      aX = kx*aX *32*9.81/1024;
+      
+      
+      aY = float( getFullData(aY_L, aY_H) );
+      aY = ky*aY *32*9.81/1024;
+      
+      aZ = float( getFullData(aZ_L, aZ_H) );
+      aZ = kz*aZ *32*9.81/1024;
+      
       text(aX + " aX",width*0.1,height*0.05*13);
-      
-      aY = float( (aY_L + aY_H)/32 );
-      aY = aY *32*9.81/1024;
       text(aY + " aY",width*0.1,height*0.05*14);
-      
-      aZ = float( (aZ_L + aZ_H)/32 );
-      aZ = aZ *32*9.81/1024;
       text(aZ + " aZ",width*0.1,height*0.05*15);
+      
+      aXmid = alpha*aX+(1-alpha)*aXmid;
+      aYmid = alpha*aY+(1-alpha)*aYmid;
+      aZmid = alpha*aZ+(1-alpha)*aZmid;
+      
+      text(aXmid + " aXmid",width*0.1,height*0.05*16);
+      text(aYmid + " aYmid",width*0.1,height*0.05*17);
+      text(aZmid + " aZmid",width*0.1,height*0.05*18);
     }
   }
-  
-  
   
     noStroke();
     fill(100);
@@ -74,7 +90,6 @@ void draw()  {
     text(round(frameRate)+" кадров/с",width*0.7,height*0.05);
 }
 
-void mousePressed()  {
-  //RANGES
-
+int getFullData(int RegL, int RegH)  {
+  return  (RegL + RegH*256)/32;
 }

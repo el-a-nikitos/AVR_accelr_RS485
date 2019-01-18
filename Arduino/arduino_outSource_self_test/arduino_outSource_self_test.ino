@@ -69,16 +69,10 @@ void setup() {
 }
 
 void loop() {
-  Wire.beginTransmission(_i2caddr);
-  Wire.write(LIS3DH_REG_OUT_X_L | 0x80); // 0x80 for autoincrement
-  Wire.endTransmission();
-  /*
-  Wire.requestFrom(0x19, 6);
-  
-  ax = Wire.read(); ax |= ((uint16_t)Wire.read()) << 8;
-  ay = Wire.read(); ay |= ((uint16_t)Wire.read()) << 8;
-  az = Wire.read(); az |= ((uint16_t)Wire.read()) << 8;
-  */
+  //Wire.beginTransmission(_i2caddr);
+  //Wire.write(LIS3DH_REG_OUT_X_L | 0x80); // 0x80 for autoincrement
+  //Wire.endTransmission();
+
   
   //ax = readRegister8(LIS3DH_REG_WHOAMI);
   Serial.print("Sensor ID: ");
