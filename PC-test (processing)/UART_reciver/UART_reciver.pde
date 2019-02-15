@@ -1,10 +1,10 @@
 import processing.serial.*;
 
-Serial COMport = new Serial(this, "COM8", 9600);
+Serial COMport = new Serial(this, "COM7", 9600);
 
 byte Temp, aX_L, aX_H, aY_L, aY_H, aZ_L, aZ_H;
-float aX, aY, aZ, aXmid, aYmid, aZmid, alpha = 0.1;
-float kx = 1, ky = 1, kz = 9.81/10.8;
+float aX, aY, aZ, aXmid, aYmid, aZmid, alpha = 1;//0.1;
+float kx = 1, ky = 1, kz = 1;//9.81/10.8;
 boolean recive = false;
 int count = 0;
 

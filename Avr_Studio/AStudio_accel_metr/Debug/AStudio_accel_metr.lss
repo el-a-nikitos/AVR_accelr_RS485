@@ -3,31 +3,31 @@ AStudio_accel_metr.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000029c  00000000  00000000  00000094  2**1
+  0 .text         0000025e  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000004  00800060  0000029c  00000330  2**0
+  1 .data         00000004  00800060  0000025e  000002f2  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000006  00800064  00800064  00000334  2**0
+  2 .bss          00000006  00800064  00800064  000002f6  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000334  2**0
+  3 .comment      00000030  00000000  00000000  000002f6  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000364  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000328  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000070  00000000  00000000  000003a0  2**0
+  5 .debug_aranges 00000070  00000000  00000000  00000364  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000b0d  00000000  00000000  00000410  2**0
+  6 .debug_info   00000a89  00000000  00000000  000003d4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000005dd  00000000  00000000  00000f1d  2**0
+  7 .debug_abbrev 000005dd  00000000  00000000  00000e5d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000005c8  00000000  00000000  000014fa  2**0
+  8 .debug_line   0000055a  00000000  00000000  0000143a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000000c4  00000000  00000000  00001ac4  2**2
+  9 .debug_frame  000000c4  00000000  00000000  00001994  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000003f3  00000000  00000000  00001b88  2**0
+ 10 .debug_str    000003f3  00000000  00000000  00001a58  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000219  00000000  00000000  00001f7b  2**0
+ 11 .debug_loc    00000219  00000000  00000000  00001e4b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000060  00000000  00000000  00002194  2**0
+ 12 .debug_ranges 00000060  00000000  00000000  00002064  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -65,7 +65,7 @@ Disassembly of section .text:
   32:	10 e0       	ldi	r17, 0x00	; 0
   34:	a0 e6       	ldi	r26, 0x60	; 96
   36:	b0 e0       	ldi	r27, 0x00	; 0
-  38:	ec e9       	ldi	r30, 0x9C	; 156
+  38:	ee e5       	ldi	r30, 0x5E	; 94
   3a:	f2 e0       	ldi	r31, 0x02	; 2
   3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
   3e:	05 90       	lpm	r0, Z+
@@ -88,7 +88,7 @@ Disassembly of section .text:
   54:	b2 07       	cpc	r27, r18
   56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
   58:	98 d0       	rcall	.+304    	; 0x18a <main>
-  5a:	1e c1       	rjmp	.+572    	; 0x298 <_exit>
+  5a:	ff c0       	rjmp	.+510    	; 0x25a <_exit>
 
 0000005c <__bad_interrupt>:
   5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
@@ -393,10 +393,10 @@ void TWI_init_speed(uint8_t prescal)	{
  1d2:	60 e0       	ldi	r22, 0x00	; 0
  1d4:	80 e0       	ldi	r24, 0x00	; 0
  1d6:	43 df       	rcall	.-378    	; 0x5e <digitalWrite_portB>
-		delay_counters(400000);
- 1d8:	60 e8       	ldi	r22, 0x80	; 128
- 1da:	7a e1       	ldi	r23, 0x1A	; 26
- 1dc:	86 e0       	ldi	r24, 0x06	; 6
+		delay_counters(800000);
+ 1d8:	60 e0       	ldi	r22, 0x00	; 0
+ 1da:	75 e3       	ldi	r23, 0x35	; 53
+ 1dc:	8c e0       	ldi	r24, 0x0C	; 12
  1de:	90 e0       	ldi	r25, 0x00	; 0
  1e0:	6a df       	rcall	.-300    	; 0xb6 <delay_counters>
 
@@ -457,49 +457,10 @@ void TWI_init_speed(uint8_t prescal)	{
 		UART_write( who_I_am );
  252:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <who_I_am>
  256:	4a df       	rcall	.-364    	; 0xec <UART_write>
-		UART_write( Temp_H );
- 258:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <Temp_H>
- 25c:	47 df       	rcall	.-370    	; 0xec <UART_write>
-		
-		
-		UART_write( 100 );
- 25e:	84 e6       	ldi	r24, 0x64	; 100
- 260:	45 df       	rcall	.-374    	; 0xec <UART_write>
-		UART_write( aX_L );
- 262:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <aX_L>
- 266:	42 df       	rcall	.-380    	; 0xec <UART_write>
-		UART_write( aX_H );
- 268:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <aX_H>
- 26c:	3f df       	rcall	.-386    	; 0xec <UART_write>
-		
-		UART_write( 101 );
- 26e:	85 e6       	ldi	r24, 0x65	; 101
- 270:	3d df       	rcall	.-390    	; 0xec <UART_write>
-		UART_write( aY_L );
- 272:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <aY_L>
- 276:	3a df       	rcall	.-396    	; 0xec <UART_write>
-		UART_write( aY_H );
- 278:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <aY_H>
- 27c:	37 df       	rcall	.-402    	; 0xec <UART_write>
-		
-		UART_write( 102 );
- 27e:	86 e6       	ldi	r24, 0x66	; 102
- 280:	35 df       	rcall	.-406    	; 0xec <UART_write>
-		UART_write( aZ_L );
- 282:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <aZ_L>
- 286:	32 df       	rcall	.-412    	; 0xec <UART_write>
-		UART_write( aZ_H );
- 288:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <__data_end>
- 28c:	2f df       	rcall	.-418    	; 0xec <UART_write>
-		
-		UART_write( who_I_am + 1 );
- 28e:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <who_I_am>
- 292:	8f 5f       	subi	r24, 0xFF	; 255
- 294:	2b df       	rcall	.-426    	; 0xec <UART_write>
- 296:	9d cf       	rjmp	.-198    	; 0x1d2 <main+0x48>
+ 258:	bc cf       	rjmp	.-136    	; 0x1d2 <main+0x48>
 
-00000298 <_exit>:
- 298:	f8 94       	cli
+0000025a <_exit>:
+ 25a:	f8 94       	cli
 
-0000029a <__stop_program>:
- 29a:	ff cf       	rjmp	.-2      	; 0x29a <__stop_program>
+0000025c <__stop_program>:
+ 25c:	ff cf       	rjmp	.-2      	; 0x25c <__stop_program>

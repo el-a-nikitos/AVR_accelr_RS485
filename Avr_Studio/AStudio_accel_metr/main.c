@@ -88,7 +88,7 @@ int main(void)
     while (1) 
     {
 		digitalWrite_portB(0, LOW);
-		delay_counters(400000);
+		delay_counters(800000);
 
 		digitalWrite_portB(0, HIGH);
 		delay_counters(30000);
@@ -105,8 +105,8 @@ int main(void)
 		aZ_H = TWI_read_byte(_i2caddr, LIS3DH_REG_OUT_Z_H);
 		
 		UART_write( who_I_am );
+		/*
 		UART_write( Temp_H );
-		
 		
 		UART_write( 100 );
 		UART_write( aX_L );
@@ -121,6 +121,7 @@ int main(void)
 		UART_write( aZ_H );
 		
 		UART_write( who_I_am + 1 );
+		*/
 		
     }
 	return 0;
