@@ -47,8 +47,6 @@ F 3 "" H -3900 5900 60  0001 C CNN
 	1    -3900 5900
 	1    0    0    -1  
 $EndComp
-Text GLabel -3900 5900 2    60   Input ~ 0
-GND
 Text GLabel 4100 2350 0    60   Input ~ 0
 GND
 Text GLabel 4100 2550 0    60   Input ~ 0
@@ -390,7 +388,7 @@ Text GLabel 5600 4900 3    60   Input ~ 0
 SCL
 Text GLabel 5450 4900 3    60   Input ~ 0
 SDA
-Text GLabel -750 5200 2    60   Input ~ 0
+Text GLabel -3050 5200 0    60   Input ~ 0
 GND
 $Comp
 L MOTOR:Диод_шоттки VD1
@@ -403,7 +401,7 @@ F 3 "" H -2500 5600 60  0001 C CNN
 	1    -2500 5600
 	0    1    1    0   
 $EndComp
-Text GLabel -3050 5200 0    60   Input ~ 0
+Text GLabel -750 5200 2    60   Input ~ 0
 GND_in
 Connection ~ -2500 5200
 $Comp
@@ -715,8 +713,6 @@ F 3 "" H -4450 5900 60  0001 C CNN
 	1    -4450 5900
 	1    0    0    -1  
 $EndComp
-Text GLabel -4450 5900 2    60   Input ~ 0
-GND
 Text GLabel -4450 5400 2    60   Input ~ 0
 Ep
 $Comp
@@ -734,4 +730,8 @@ Text GLabel 4100 3050 0    60   Input ~ 0
 EN1
 Text GLabel -4450 4600 2    60   Input ~ 0
 EN1
+Text GLabel -3900 5900 2    60   Input ~ 0
+GND_in
+Text GLabel -4450 5900 2    60   Input ~ 0
+GND_in
 $EndSCHEMATC
