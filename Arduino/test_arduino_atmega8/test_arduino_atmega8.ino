@@ -3,16 +3,25 @@
 
 
 void setup() {
+  Serial.begin(9600);
+
+  //analogReference(INTERNAL);
   
   pinMode(PB0, OUTPUT);
+  pinMode(PB1, OUTPUT);
   
 }
 
 void loop() {
 
+  digitalWrite(PB1, HIGH);
+  int Ucc = analogRead(A0);
+  Serial.println( Ucc );
+  
   digitalWrite(PB0, HIGH);
-  delay(500);
+  delay(10);
   digitalWrite(PB0, LOW);
-  delay(500);
+  delay(990);
+  
   
 }
